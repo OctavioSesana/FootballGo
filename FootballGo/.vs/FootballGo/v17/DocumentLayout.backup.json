@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\domain.model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:domain.model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\dtos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:dtos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\domain.services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:domain.services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\data\\clienteinmemory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:data\\clienteinmemory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\DTOs\\Cliente.cs",
+              "RelativeDocumentMoniker": "DTOs\\Cliente.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\DTOs\\Cliente.cs",
+              "RelativeToolTip": "DTOs\\Cliente.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T15:03:02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClienteService.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Services\\ClienteService.cs",
+              "RelativeDocumentMoniker": "Domain.Services\\ClienteService.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Services\\ClienteService.cs",
+              "RelativeToolTip": "Domain.Services\\ClienteService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAzwCAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T15:02:13.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwCYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T14:54:06.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Model\\Cliente.cs",
+              "RelativeDocumentMoniker": "Domain.Model\\Cliente.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Model\\Cliente.cs",
+              "RelativeToolTip": "Domain.Model\\Cliente.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T15:01:22.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClienteInMemory.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Data\\ClienteInMemory.cs",
+              "RelativeDocumentMoniker": "Data\\ClienteInMemory.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Data\\ClienteInMemory.cs",
+              "RelativeToolTip": "Data\\ClienteInMemory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T15:00:32.424Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
