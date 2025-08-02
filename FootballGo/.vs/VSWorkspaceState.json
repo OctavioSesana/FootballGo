@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Data\\obj\\Release\\net8.0",
+    "\\Domain.Services"
   ],
-  "SelectedNode": "\\FootballGo.sln",
+  "SelectedNode": "\\Domain.Services\\Domain.Services.csproj",
   "PreviewInSolutionExplorer": false
 }
