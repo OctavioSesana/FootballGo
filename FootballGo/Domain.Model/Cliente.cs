@@ -7,17 +7,22 @@ namespace Domain.Model
         public int Id { get; private set; }
         public string Nombre { get; private set; }
         public string Apellido { get; private set; }
+        
 
         public string Email { get; private set; }
-       
+        public int dni { get; private set; }
+        public int telefono { get; private set; }
+
         public DateTime FechaAlta { get; private set; }
 
-        public Cliente(int id, string nombre, string apellido, string email, DateTime fechaAlta)
+        public Cliente(int id, string nombre, string apellido, string email, int dni, int telefono, DateTime fechaAlta)
         {
             SetId(id);
             SetNombre(nombre);
             SetApellido(apellido);
             SetEmail(email);
+            SetDNI(dni);
+            SetTelefono(telefono);
             SetFechaAlta(fechaAlta);
         }
 
@@ -55,6 +60,25 @@ namespace Domain.Model
                 return false;
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
+
+        public void SetDNI(int dni)
+        {
+            if (dni < 0)
+                throw new ArgumentException("El DNI no puede ser negativo.", nameof(dni));
+            if (dni % 1 != 0)
+                throw new ArgumentException("El DNI debe ser un número entero.", nameof(dni));
+            if (dni < 1000000 || dni > 99999999)
+                throw new ArgumentException("El DNI debe tener entre 7 y 8 dígitos.", nameof(dni));
+            this.dni = (int)dni;
+        }
+
+        public void SetTelefono(int telefono)
+        {
+            if (telefono < 0)
+                throw new ArgumentException("El teléfono no puede ser negativo.", nameof(telefono));
+            this.telefono = (int)telefono;
+        }
+
 
         public void SetFechaAlta(DateTime fechaAlta)
         {

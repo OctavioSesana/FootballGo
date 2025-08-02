@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FootballGo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b718ded61fd299584b3628f20789b6e01014b5a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("FootballGo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FootballGo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

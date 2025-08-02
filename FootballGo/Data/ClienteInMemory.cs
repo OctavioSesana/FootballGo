@@ -11,7 +11,8 @@ namespace Data
         {
             Clientes = new List<Cliente>
             {
-                new Cliente(1, "Octavio", "Sesana", "octasesana@gmail.com", DateTime.Now.AddMonths(-5)),
+                new Cliente(1, "Octavio", "Sesana", "octasesana@gmail.com", 43644808, 33333, DateTime.Now.AddMonths(-5)),
+                new Cliente(2, "Emilio", "Zallocco", "emizallocco@gmail.com", 44789093, 222, DateTime.Now.AddMonths(-5)),
             };
         }
 

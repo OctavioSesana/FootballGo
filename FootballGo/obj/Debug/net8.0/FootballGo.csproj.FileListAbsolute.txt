@@ -12,3 +12,4 @@ C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballG
 C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.pdb
 C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.genruntimeconfig.cache
 C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\ref\FootballGo.dll
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.sourcelink.json

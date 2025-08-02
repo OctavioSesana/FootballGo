@@ -50,7 +50,10 @@ namespace Domain.Services
                 clienteToUpdate.SetNombre(cliente.Nombre);
                 clienteToUpdate.SetApellido(cliente.Apellido);
                 clienteToUpdate.SetEmail(cliente.Email);
+                clienteToUpdate.SetDNI(cliente.dni);
+                clienteToUpdate.SetTelefono(cliente.telefono);
                 clienteToUpdate.SetFechaAlta(cliente.FechaAlta);
+                
 
                 return true;
             }
