@@ -1,23 +1,21 @@
 ﻿using Domain.Model;
+using FootballGo.Data; // Asegurate de importar el namespace correcto
 
 namespace Domain.Services;
 
 public class EmpleadoService
 {
-    private readonly List<Empleado> _empleados = new();
-    private int _nextId = 1;
-
     public Empleado Add(Empleado e)
     {
-        e.SetIdEmpleado(_nextId++);
-        _empleados.Add(e);
+        e.SetIdEmpleado(GetNextId());
+        EmpleadoInMemory.Empleados.Add(e);
         return e;
     }
 
-    public List<Empleado> GetAll() => _empleados;
+    public List<Empleado> GetAll() => EmpleadoInMemory.Empleados.ToList();
 
     public Empleado? Get(int id) =>
-        _empleados.FirstOrDefault(e => e.IdEmpleado == id);
+        EmpleadoInMemory.Empleados.FirstOrDefault(e => e.IdEmpleado == id);
 
     public bool Update(Empleado actualizado)
     {
@@ -37,6 +35,13 @@ public class EmpleadoService
     public bool Delete(int id)
     {
         var empleado = Get(id);
-        return empleado is not null && _empleados.Remove(empleado);
+        return empleado is not null && EmpleadoInMemory.Empleados.Remove(empleado);
+    }
+
+    private int GetNextId()
+    {
+        return EmpleadoInMemory.Empleados.Count > 0
+            ? EmpleadoInMemory.Empleados.Max(e => e.IdEmpleado) + 1
+            : 1;
     }
 }

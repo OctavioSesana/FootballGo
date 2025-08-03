@@ -17,3 +17,16 @@ C:\Users\Emilio\Desktop\footbalGo\footbalGo\FootballGo\FootballGo\obj\Debug\net8
 C:\Users\Emilio\Desktop\footbalGo\footbalGo\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.pdb
 C:\Users\Emilio\Desktop\footbalGo\footbalGo\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.genruntimeconfig.cache
 C:\Users\Emilio\Desktop\footbalGo\footbalGo\FootballGo\FootballGo\obj\Debug\net8.0\ref\FootballGo.dll
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.exe
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.deps.json
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.runtimeconfig.json
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.dll
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\bin\Debug\net8.0\FootballGo.pdb
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.csproj.CoreCompileInputs.cache
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.sourcelink.json
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.dll
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\refint\FootballGo.dll
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.pdb
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\FootballGo.genruntimeconfig.cache
+C:\Users\octav\OneDrive\Desktop\FootballGo\FootballGo\obj\Debug\net8.0\ref\FootballGo.dll
