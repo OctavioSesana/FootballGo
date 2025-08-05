@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4/BtwvKdsGc=",
+  "dgSpecHash": "aQSMQd+87jo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\octav\\OneDrive\\Desktop\\ISI-UTN\\4to Año\\Electivas\\.net\\TPI - ejemplos\\ServicesInMemory.Version2025.06.20\\ServicesInMemory\\Data\\Data.csproj",
+  "projectFilePath": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\octav\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\octav\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

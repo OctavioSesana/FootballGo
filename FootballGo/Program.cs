@@ -1,6 +1,5 @@
 ﻿using Domain.Services;
 using Domain.Model;
-
 class Program
 {
     static void Main(string[] args)
@@ -151,118 +150,119 @@ class Program
     }
 
     // -------------------------- EMPLEADOS --------------------------
-    static void AgregarEmpleado(EmpleadoService service)
-    {
-        try
-        {
-            Console.Clear();
-            Console.WriteLine("=== ALTA DE EMPLEADO ===");
-            Console.Write("Nombre: ");
-            var nombre = Console.ReadLine();
+     static void AgregarEmpleado(EmpleadoService service)
+     {
+         try
+         {
+             Console.Clear();
+             Console.WriteLine("=== ALTA DE EMPLEADO ===");
+             Console.Write("Nombre: ");
+             var nombre = Console.ReadLine();
 
-            Console.Write("Apellido: ");
-            var apellido = Console.ReadLine();
+             Console.Write("Apellido: ");
+             var apellido = Console.ReadLine();
 
-            Console.Write("DNI: ");
-            var dni = Console.ReadLine();
+             Console.Write("DNI: ");
+             var dni = Console.ReadLine();
 
-            Console.Write("Sueldo semanal: ");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal sueldo)) throw new ArgumentException("Sueldo inválido.");
+             Console.Write("Sueldo semanal: ");
+             if (!decimal.TryParse(Console.ReadLine(), out decimal sueldo)) throw new ArgumentException("Sueldo inválido.");
 
-            Console.Write("¿Está activo? (s/n): ");
-            bool activo = Console.ReadLine()?.ToLower() == "s";
+             Console.Write("¿Está activo? (s/n): ");
+             bool activo = Console.ReadLine()?.ToLower() == "s";
 
-            Console.Write("Fecha de ingreso (yyyy-MM-dd) [Enter = hoy]: ");
-            var fechaStr = Console.ReadLine();
-            var fechaIngreso = string.IsNullOrWhiteSpace(fechaStr) ? DateTime.Today : DateTime.Parse(fechaStr);
+             Console.Write("Fecha de ingreso (yyyy-MM-dd) [Enter = hoy]: ");
+             var fechaStr = Console.ReadLine();
+             var fechaIngreso = string.IsNullOrWhiteSpace(fechaStr) ? DateTime.Today : DateTime.Parse(fechaStr);
 
-            var empleado = new Empleado(0, nombre, apellido, dni, sueldo, activo, fechaIngreso);
-            service.Add(empleado);
+             var empleado = new Empleado(0, nombre, apellido, dni, sueldo, activo, fechaIngreso);
+             service.Add(empleado);
 
-            Console.WriteLine("✅ Empleado agregado.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"❌ Error: {ex.Message}");
-        }
+             Console.WriteLine("✅ Empleado agregado.");
+         }
+         catch (Exception ex)
+         {
+             Console.WriteLine($"❌ Error: {ex.Message}");
+         }
 
-        Console.ReadKey();
-    }
+         Console.ReadKey();
+     }
 
-    static void MostrarEmpleados(EmpleadoService service)
-    {
-        Console.Clear();
-        Console.WriteLine("=== LISTADO DE EMPLEADOS ===");
-        foreach (var e in service.GetAll())
-        {
-            Console.WriteLine($"ID: {e.IdEmpleado} | {e.Nombre} {e.Apellido} | DNI: {e.Dni} | Sueldo: ${e.SueldoSemanal} | Estado: {(e.EstaActivo ? "Activo" : "Inactivo")} | Ingreso: {e.FechaIngreso:yyyy-MM-dd}");
-        }
-        Console.ReadKey();
-    }
+     static void MostrarEmpleados(EmpleadoService service)
+     {
+         Console.Clear();
+         Console.WriteLine("=== LISTADO DE EMPLEADOS ===");
+         foreach (var e in service.GetAll())
+         {
+             Console.WriteLine($"ID: {e.IdEmpleado} | {e.Nombre} {e.Apellido} | DNI: {e.Dni} | Sueldo: ${e.SueldoSemanal} | Estado: {(e.EstaActivo ? "Activo" : "Inactivo")} | Ingreso: {e.FechaIngreso:yyyy-MM-dd}");
+         }
+         Console.ReadKey();
+     }
 
-    static void ModificarEmpleado(EmpleadoService service)
-    {
-        Console.Clear();
-        Console.WriteLine("=== MODIFICAR EMPLEADO ===");
-        Console.Write("ID del empleado: ");
-        if (!int.TryParse(Console.ReadLine(), out int id)) return;
+     static void ModificarEmpleado(EmpleadoService service)
+     {
+         Console.Clear();
+         Console.WriteLine("=== MODIFICAR EMPLEADO ===");
+         Console.Write("ID del empleado: ");
+         if (!int.TryParse(Console.ReadLine(), out int id)) return;
 
-        var empleado = service.Get(id);
-        if (empleado == null)
-        {
-            Console.WriteLine("❌ Empleado no encontrado.");
-            Console.ReadKey();
-            return;
-        }
+         var empleado = service.Get(id);
+         if (empleado == null)
+         {
+             Console.WriteLine("❌ Empleado no encontrado.");
+             Console.ReadKey();
+             return;
+         }
 
-        try
-        {
-            Console.Write($"Nuevo nombre ({empleado.Nombre}): ");
-            var nombre = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(nombre)) empleado.SetNombre(nombre);
+         try
+         {
+             Console.Write($"Nuevo nombre ({empleado.Nombre}): ");
+             var nombre = Console.ReadLine();
+             if (!string.IsNullOrWhiteSpace(nombre)) empleado.SetNombre(nombre);
 
-            Console.Write($"Nuevo apellido ({empleado.Apellido}): ");
-            var apellido = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(apellido)) empleado.SetApellido(apellido);
+             Console.Write($"Nuevo apellido ({empleado.Apellido}): ");
+             var apellido = Console.ReadLine();
+             if (!string.IsNullOrWhiteSpace(apellido)) empleado.SetApellido(apellido);
 
-            Console.Write($"Nuevo DNI ({empleado.Dni}): ");
-            var dni = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(dni)) empleado.SetDni(dni);
+             Console.Write($"Nuevo DNI ({empleado.Dni}): ");
+             var dni = Console.ReadLine();
+             if (!string.IsNullOrWhiteSpace(dni)) empleado.SetDni(dni);
 
-            Console.Write($"Nuevo sueldo semanal ({empleado.SueldoSemanal}): ");
-            if (decimal.TryParse(Console.ReadLine(), out decimal sueldo)) empleado.SetSueldoSemanal(sueldo);
+             Console.Write($"Nuevo sueldo semanal ({empleado.SueldoSemanal}): ");
+             if (decimal.TryParse(Console.ReadLine(), out decimal sueldo)) empleado.SetSueldoSemanal(sueldo);
 
-            Console.Write("¿Está activo? (s/n): ");
-            var estado = Console.ReadLine();
-            empleado.SetEstaActivo(estado?.ToLower() == "s");
+             Console.Write("¿Está activo? (s/n): ");
+             var estado = Console.ReadLine();
+             empleado.SetEstaActivo(estado?.ToLower() == "s");
 
-            Console.Write($"Nueva fecha de ingreso ({empleado.FechaIngreso:yyyy-MM-dd}): ");
-            var fechaStr = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(fechaStr) && DateTime.TryParse(fechaStr, out var fecha))
-                empleado.SetFechaIngreso(fecha);
+             Console.Write($"Nueva fecha de ingreso ({empleado.FechaIngreso:yyyy-MM-dd}): ");
+             var fechaStr = Console.ReadLine();
+             if (!string.IsNullOrWhiteSpace(fechaStr) && DateTime.TryParse(fechaStr, out var fecha))
+                 empleado.SetFechaIngreso(fecha);
 
-            if (service.Update(empleado))
-                Console.WriteLine("✅ Empleado modificado.");
-            else
-                Console.WriteLine("❌ No se pudo modificar.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"❌ Error: {ex.Message}");
-        }
+             if (service.Update(empleado))
+                 Console.WriteLine("✅ Empleado modificado.");
+             else
+                 Console.WriteLine("❌ No se pudo modificar.");
+         }
+         catch (Exception ex)
+         {
+             Console.WriteLine($"❌ Error: {ex.Message}");
+         }
 
-        Console.ReadKey();
-    }
+         Console.ReadKey();
+     }
 
-    static void EliminarEmpleado(EmpleadoService service)
-    {
-        Console.Clear();
-        Console.WriteLine("=== ELIMINAR EMPLEADO ===");
-        Console.Write("ID del empleado: ");
-        if (int.TryParse(Console.ReadLine(), out int id) && service.Delete(id))
-            Console.WriteLine("✅ Empleado eliminado.");
-        else
-            Console.WriteLine("❌ Empleado no encontrado.");
-        Console.ReadKey();
-    }
+     static void EliminarEmpleado(EmpleadoService service)
+     {
+         Console.Clear();
+         Console.WriteLine("=== ELIMINAR EMPLEADO ===");
+         Console.Write("ID del empleado: ");
+         if (int.TryParse(Console.ReadLine(), out int id) && service.Delete(id))
+             Console.WriteLine("✅ Empleado eliminado.");
+         else
+             Console.WriteLine("❌ Empleado no encontrado.");
+         Console.ReadKey();
+     } 
+     
 }

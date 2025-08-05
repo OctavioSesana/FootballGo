@@ -1,5 +1,5 @@
 ﻿using Domain.Model;
-using FootballGo.Data; // Asegurate de importar el namespace correcto
+using Data; // Asegurate de importar el namespace correcto
 
 namespace Domain.Services;
 

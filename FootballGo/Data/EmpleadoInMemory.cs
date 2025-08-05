@@ -1,13 +1,8 @@
 ﻿using Domain.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FootballGo.Data
+namespace Data
 {
-    internal class EmpleadoInMemory
+    public class EmpleadoInMemory
     {
         //No es ThreadSafe pero sirve para el proposito del ejemplo        
         public static List<Empleado> Empleados;
