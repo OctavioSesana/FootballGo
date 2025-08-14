@@ -63,7 +63,7 @@ namespace Domain.Services
             }
         }
 
-        //No es ThreadSafe pero sirve para el proposito del ejemplo        
+        //No es ThreadSafe pero sirve para el proposito del ejemplo    0    
         private static int GetNextId()
         {
             int nextId;

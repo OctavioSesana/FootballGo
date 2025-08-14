@@ -52,7 +52,6 @@
             lblName.Size = new Size(67, 20);
             lblName.TabIndex = 0;
             lblName.Text = "Nombre:";
-            //lblName.Click += this.label1_Click;
             // 
             // lblTel
             // 
@@ -133,7 +132,6 @@
             lblFecha.Size = new Size(50, 20);
             lblFecha.TabIndex = 10;
             lblFecha.Text = "Fecha:";
-            //lblFecha.Click += this.label1_Click_1;
             // 
             // dtpFechaAlta
             // 
@@ -150,7 +148,7 @@
             btnSave.TabIndex = 12;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += new System.EventHandler(this.btnGuardar_Click);
+            btnSave.Click += btnGuardar_Click;
             // 
             // btnCancel
             // 
@@ -160,7 +158,7 @@
             btnCancel.TabIndex = 13;
             btnCancel.Text = "Cancelar";
             btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += new System.EventHandler(this.btnCancelar_Click);
+            btnCancel.Click += btnCancelar_Click;
             // 
             // ClienteDetailsForm
             // 
@@ -183,6 +181,7 @@
             Controls.Add(lblName);
             Name = "ClienteDetailsForm";
             Text = "Form2";
+            Load += ClienteDetailsForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
