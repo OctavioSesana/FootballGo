@@ -1,0 +1,7 @@
+# Archivos de Visual Studio
+.vs/
+*.dtbcache.v2
+*.fudtcache.v2
+*.suo
+DocumentLayout.backup.json
+DocumentLayout.json
