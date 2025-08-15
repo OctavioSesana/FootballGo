@@ -84,7 +84,7 @@
             Controls.Add(btnDelete);
             Controls.Add(dgvCliente);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Clientes";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCliente).EndInit();
             ResumeLayout(false);
