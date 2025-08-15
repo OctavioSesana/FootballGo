@@ -97,6 +97,11 @@ namespace FootballGo.UI
             this.Close();
         }
 
+        private void ClienteDetailsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Propiedad para acceder al cliente desde el formulario principal
         public Cliente? ClienteResult => _cliente;
     }
