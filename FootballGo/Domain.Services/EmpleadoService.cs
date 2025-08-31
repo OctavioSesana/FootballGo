@@ -1,47 +1,26 @@
-﻿using Domain.Model;
-using Data; // Asegurate de importar el namespace correcto
+﻿using Data;
+using Domain.Model;
+using FootballGo.DTOs;
 
-namespace Domain.Services;
-
-public class EmpleadoService
+namespace Domain.Services
 {
-    public Empleado Add(Empleado e)
+    public class EmpleadoService
     {
-        e.SetIdEmpleado(GetNextId());
-        EmpleadoInMemory.Empleados.Add(e);
-        return e;
-    }
+        private readonly EmpleadoRepository _repo;
 
-    public List<Empleado> GetAll() => EmpleadoInMemory.Empleados.ToList();
+        public EmpleadoService()
+        {
+            _repo = new EmpleadoRepository();
+        }
 
-    public Empleado? Get(int id) =>
-        EmpleadoInMemory.Empleados.FirstOrDefault(e => e.IdEmpleado == id);
+        public void Add(Empleado empleado) => _repo.Add(empleado);
 
-    public bool Update(Empleado actualizado)
-    {
-        var existente = Get(actualizado.IdEmpleado);
-        if (existente is null) return false;
+        public IEnumerable<Empleado> GetAll() => _repo.GetAll();
 
-        existente.SetNombre(actualizado.Nombre);
-        existente.SetApellido(actualizado.Apellido);
-        existente.SetDni(actualizado.Dni);
-        existente.SetSueldoSemanal(actualizado.SueldoSemanal);
-        existente.SetEstaActivo(actualizado.EstaActivo);
-        existente.SetFechaIngreso(actualizado.FechaIngreso);
+        public Empleado? Get(int id) => _repo.Get(id);
 
-        return true;
-    }
+        public bool Update(Empleado actualizado) => _repo.Update(actualizado);
 
-    public bool Delete(int id)
-    {
-        var empleado = Get(id);
-        return empleado is not null && EmpleadoInMemory.Empleados.Remove(empleado);
-    }
-
-    private int GetNextId()
-    {
-        return EmpleadoInMemory.Empleados.Count > 0
-            ? EmpleadoInMemory.Empleados.Max(e => e.IdEmpleado) + 1
-            : 1;
+        public bool Delete(int id) => _repo.Delete(id);
     }
 }

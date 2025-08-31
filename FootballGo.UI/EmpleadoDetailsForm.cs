@@ -22,7 +22,7 @@ namespace FootballGo.UI
 
                 txtNombre.Text = original.Nombre;
                 txtApellido.Text = original.Apellido;
-                txtDNI.Text = original.Dni;
+                //txtDNI.Text = original.Dni;
                 txtSueldo.Text = original.SueldoSemanal.ToString("0.##");
                // chkActivo.Checked = original.EstaActivo;
                 dtpFechaIngreso.Value = original.FechaIngreso;
@@ -59,7 +59,7 @@ namespace FootballGo.UI
 
             EmpleadoEditado!.SetNombre(txtNombre.Text.Trim());
             EmpleadoEditado!.SetApellido(txtApellido.Text.Trim());
-            EmpleadoEditado!.SetDni(txtDNI.Text.Trim());
+            // EmpleadoEditado!.SetDni(txtDNI.Text.Trim());
             EmpleadoEditado!.SetSueldoSemanal(sueldo);                       // ← AHORA SE GUARDA
            // EmpleadoEditado!.SetEstaActivo(chkActivo.Checked);
             EmpleadoEditado!.SetFechaIngreso(dtpFechaIngreso.Value);

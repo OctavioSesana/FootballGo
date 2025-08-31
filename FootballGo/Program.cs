@@ -175,8 +175,8 @@ class Program
              var fechaStr = Console.ReadLine();
              var fechaIngreso = string.IsNullOrWhiteSpace(fechaStr) ? DateTime.Today : DateTime.Parse(fechaStr);
 
-             var empleado = new Empleado(0, nombre, apellido, dni, sueldo, activo, fechaIngreso);
-             service.Add(empleado);
+             //var empleado = new Empleado(0, nombre, apellido, dni, sueldo, activo, fechaIngreso);
+             //service.Add(empleado);
 
              Console.WriteLine("✅ Empleado agregado.");
          }
@@ -226,7 +226,7 @@ class Program
 
              Console.Write($"Nuevo DNI ({empleado.Dni}): ");
              var dni = Console.ReadLine();
-             if (!string.IsNullOrWhiteSpace(dni)) empleado.SetDni(dni);
+             //if (!string.IsNullOrWhiteSpace(dni)) empleado.SetDni(dni);
 
              Console.Write($"Nuevo sueldo semanal ({empleado.SueldoSemanal}): ");
              if (decimal.TryParse(Console.ReadLine(), out decimal sueldo)) empleado.SetSueldoSemanal(sueldo);

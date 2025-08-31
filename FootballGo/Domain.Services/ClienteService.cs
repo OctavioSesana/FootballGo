@@ -1,83 +1,30 @@
-﻿using Domain.Model;
-using Data;
+﻿using Data;
+using Domain.Model;
+using FootballGo.DTOs;
 
 namespace Domain.Services
 {
-    public class ClienteService 
+    public class ClienteService
     {
-        public void Add(Cliente cliente)
-        {
-            cliente.SetId(GetNextId());
+        private readonly ClienteRepository _repo;
 
-            ClienteInMemory.Clientes.Add(cliente);
+        public ClienteService()
+        {
+            _repo = new ClienteRepository();
         }
 
-        public bool Delete(int id)
-        {
-            Cliente? clienteToDelete = ClienteInMemory.Clientes.Find(x => x.Id == id);
+        public void Add(Cliente cliente) => _repo.Add(cliente);
 
-            if (clienteToDelete != null)
-            {
-                ClienteInMemory.Clientes.Remove(clienteToDelete);
+        public bool Delete(int id) => _repo.Delete(id);
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        public Cliente? Get(int id) => _repo.Get(id);
 
-        public Cliente Get(int id)
-        {
-            //Deberia devolver un objeto cloneado 
-            return ClienteInMemory.Clientes.Find(x => x.Id == id);
-        }
+        public IEnumerable<Cliente> GetAll() => _repo.GetAll();
 
-        public IEnumerable<Cliente> GetAll()
-        {
-            //Devuelvo una lista nueva cada vez que se llama a GetAll
-            //pero idealmente deberia implementar un Deep Clone
-            return ClienteInMemory.Clientes.ToList();
-        }
+        public bool Update(Cliente cliente) => _repo.Update(cliente);
 
-        public bool Update(Cliente cliente)
-        {
-            Cliente? clienteToUpdate = ClienteInMemory.Clientes.Find(x => x.Id == cliente.Id);
+        public bool EmailExists(string email, int? excludeId = null) => _repo.EmailExists(email, excludeId);
 
-            if (clienteToUpdate != null)
-            {
-                clienteToUpdate.SetNombre(cliente.Nombre);
-                clienteToUpdate.SetApellido(cliente.Apellido);
-                clienteToUpdate.SetEmail(cliente.Email);
-                clienteToUpdate.SetDNI(cliente.dni);
-                clienteToUpdate.SetTelefono(cliente.telefono);
-                clienteToUpdate.SetFechaAlta(cliente.FechaAlta);
-                
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        //No es ThreadSafe pero sirve para el proposito del ejemplo    0    
-        private static int GetNextId()
-        {
-            int nextId;
-
-            if (ClienteInMemory.Clientes.Count > 0)
-            {
-                nextId = ClienteInMemory.Clientes.Max(x => x.Id) + 1;
-            }
-            else
-            {
-                nextId = 1;
-            }
-
-            return nextId;
-        }
+        public IEnumerable<Cliente> GetByCriteria(FootballGo.DTOs.ClienteCriteria criteria) => _repo.GetByCriteria(criteria);
     }
 }

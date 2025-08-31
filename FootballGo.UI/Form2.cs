@@ -94,5 +94,10 @@ namespace FootballGo.UI
                 CargarEmpleados();
             }
         }
+        public Form2(EmpleadoService empleadoService)
+        {
+            _empleadoService = empleadoService ?? throw new ArgumentNullException(nameof(empleadoService));
+            InitializeComponent();
+        }
     }
 }

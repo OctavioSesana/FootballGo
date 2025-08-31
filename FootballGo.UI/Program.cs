@@ -1,23 +1,34 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Domain.Services;
+
 namespace FootballGo.UI
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            // Crea y muestra una instancia del formulario para Empleado
-            Form2 empleadoForm = new Form2();
-            empleadoForm.Show();
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
-            // Luego, crea y ejecuta el formulario para Cliente como el formulario principal
-            Application.Run(new Form1());
+            var services = new ServiceCollection();
+
+            // Registrar servicios y forms
+            services.AddScoped<ClienteService>();
+            services.AddScoped<EmpleadoService>();
+            services.AddScoped<Form1>();
+            services.AddScoped<Form2>();
+            services.AddScoped<MenuForm>();
+
+            var provider = services.BuildServiceProvider();
+
+            // arrancar con el menú
+            Application.Run(provider.GetRequiredService<MenuForm>());
         }
     }
 }
