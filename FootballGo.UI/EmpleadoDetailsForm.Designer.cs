@@ -13,138 +13,194 @@
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            this.lblNombre = new Label();
-            this.lblApellido = new Label();
-            this.lblDNI = new Label();
-            this.lblSueldo = new Label();
-            this.lblEstado = new Label();
-            this.lblFecha = new Label();
-
-            this.txtNombre = new TextBox();
-            this.txtApellido = new TextBox();
-            this.txtDNI = new TextBox();
-            this.txtSueldo = new TextBox();
-            this.txtEstado = new TextBox();           // si luego querés CheckBox, lo cambiamos
-
-            this.dtpFechaIngreso = new DateTimePicker();
-
-            this.btnSave = new Button();
-            this.btnCancel = new Button();
-
-            this.SuspendLayout();
-
+            lblNombre = new Label();
+            lblApellido = new Label();
+            lblDNI = new Label();
+            lblSueldo = new Label();
+            lblEstado = new Label();
+            lblFecha = new Label();
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
+            txtDNI = new TextBox();
+            txtSueldo = new TextBox();
+            txtEstado = new TextBox();
+            dtpFechaIngreso = new DateTimePicker();
+            btnSave = new Button();
+            btnCancel = new Button();
+            txtContrasenia = new TextBox();
+            label1 = new Label();
+            SuspendLayout();
+            // 
             // lblNombre
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new Point(12, 20);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new Size(60, 15);
-            this.lblNombre.Text = "Nombre:";
-
-            // txtNombre
-            this.txtNombre.Location = new Point(120, 17);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new Size(200, 23);
-
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(14, 27);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(67, 20);
+            lblNombre.TabIndex = 13;
+            lblNombre.Text = "Nombre:";
+            // 
             // lblApellido
-            this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new Point(12, 55);
-            this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new Size(54, 15);
-            this.lblApellido.Text = "Apellido:";
-
-            // txtApellido
-            this.txtApellido.Location = new Point(120, 52);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new Size(200, 23);
-
+            // 
+            lblApellido.AutoSize = true;
+            lblApellido.Location = new Point(14, 73);
+            lblApellido.Name = "lblApellido";
+            lblApellido.Size = new Size(69, 20);
+            lblApellido.TabIndex = 11;
+            lblApellido.Text = "Apellido:";
+            // 
             // lblDNI
-            this.lblDNI.AutoSize = true;
-            this.lblDNI.Location = new Point(12, 90);
-            this.lblDNI.Name = "lblDNI";
-            this.lblDNI.Size = new Size(30, 15);
-            this.lblDNI.Text = "DNI:";
-
-            // txtDNI
-            this.txtDNI.Location = new Point(120, 87);
-            this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new Size(200, 23);
-
+            // 
+            lblDNI.AutoSize = true;
+            lblDNI.Location = new Point(14, 120);
+            lblDNI.Name = "lblDNI";
+            lblDNI.Size = new Size(38, 20);
+            lblDNI.TabIndex = 9;
+            lblDNI.Text = "DNI:";
+            // 
             // lblSueldo
-            this.lblSueldo.AutoSize = true;
-            this.lblSueldo.Location = new Point(12, 125);
-            this.lblSueldo.Name = "lblSueldo";
-            this.lblSueldo.Size = new Size(92, 15);
-            this.lblSueldo.Text = "Sueldo semanal:";
-
-            // txtSueldo
-            this.txtSueldo.Location = new Point(120, 122);
-            this.txtSueldo.Name = "txtSueldo";
-            this.txtSueldo.Size = new Size(200, 23);
-
+            // 
+            lblSueldo.AutoSize = true;
+            lblSueldo.Location = new Point(13, 190);
+            lblSueldo.Name = "lblSueldo";
+            lblSueldo.Size = new Size(117, 20);
+            lblSueldo.TabIndex = 7;
+            lblSueldo.Text = "Sueldo semanal:";
+            // 
             // lblEstado
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new Point(12, 160);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new Size(45, 15);
-            this.lblEstado.Text = "Estado:";
-
-            // txtEstado  (true/false por ahora)
-            this.txtEstado.Location = new Point(120, 157);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.Size = new Size(200, 23);
-
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.Location = new Point(13, 236);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(57, 20);
+            lblEstado.TabIndex = 5;
+            lblEstado.Text = "Estado:";
+            // 
             // lblFecha
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new Point(12, 195);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new Size(41, 15);
-            this.lblFecha.Text = "Fecha:";
-
+            // 
+            lblFecha.AutoSize = true;
+            lblFecha.Location = new Point(13, 283);
+            lblFecha.Name = "lblFecha";
+            lblFecha.Size = new Size(50, 20);
+            lblFecha.TabIndex = 3;
+            lblFecha.Text = "Fecha:";
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(137, 23);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(228, 27);
+            txtNombre.TabIndex = 12;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Location = new Point(137, 69);
+            txtApellido.Margin = new Padding(3, 4, 3, 4);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(228, 27);
+            txtApellido.TabIndex = 10;
+            // 
+            // txtDNI
+            // 
+            txtDNI.Location = new Point(137, 116);
+            txtDNI.Margin = new Padding(3, 4, 3, 4);
+            txtDNI.Name = "txtDNI";
+            txtDNI.Size = new Size(228, 27);
+            txtDNI.TabIndex = 8;
+            // 
+            // txtSueldo
+            // 
+            txtSueldo.Location = new Point(136, 186);
+            txtSueldo.Margin = new Padding(3, 4, 3, 4);
+            txtSueldo.Name = "txtSueldo";
+            txtSueldo.Size = new Size(228, 27);
+            txtSueldo.TabIndex = 6;
+            // 
+            // txtEstado
+            // 
+            txtEstado.Location = new Point(136, 232);
+            txtEstado.Margin = new Padding(3, 4, 3, 4);
+            txtEstado.Name = "txtEstado";
+            txtEstado.Size = new Size(228, 27);
+            txtEstado.TabIndex = 4;
+            // 
             // dtpFechaIngreso
-            this.dtpFechaIngreso.Location = new Point(120, 192);
-            this.dtpFechaIngreso.Name = "dtpFechaIngreso";
-            this.dtpFechaIngreso.Size = new Size(200, 23);
-
+            // 
+            dtpFechaIngreso.Location = new Point(136, 279);
+            dtpFechaIngreso.Margin = new Padding(3, 4, 3, 4);
+            dtpFechaIngreso.Name = "dtpFechaIngreso";
+            dtpFechaIngreso.Size = new Size(228, 27);
+            dtpFechaIngreso.TabIndex = 2;
+            // 
             // btnSave
-            this.btnSave.Location = new Point(120, 230);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new Size(90, 30);
-            this.btnSave.Text = "Guardar";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnGuardar_Click);
-
+            // 
+            btnSave.Location = new Point(136, 330);
+            btnSave.Margin = new Padding(3, 4, 3, 4);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(103, 40);
+            btnSave.TabIndex = 1;
+            btnSave.Text = "Guardar";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnGuardar_Click;
+            // 
             // btnCancel
-            this.btnCancel.Location = new Point(230, 230);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new Size(90, 30);
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancelar_Click);
-
+            // 
+            btnCancel.Location = new Point(262, 330);
+            btnCancel.Margin = new Padding(3, 4, 3, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(103, 40);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancelar";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancelar_Click;
+            // 
+            // txtContrasenia
+            // 
+            txtContrasenia.Location = new Point(137, 151);
+            txtContrasenia.Margin = new Padding(3, 4, 3, 4);
+            txtContrasenia.Name = "txtContrasenia";
+            txtContrasenia.Size = new Size(228, 27);
+            txtContrasenia.TabIndex = 14;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 155);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 20);
+            label1.TabIndex = 15;
+            label1.Text = "Contraseña:";
+            label1.Click += label1_Click;
+            // 
             // EmpleadoDetailsForm
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(350, 280);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.dtpFechaIngreso);
-            this.Controls.Add(this.lblFecha);
-            this.Controls.Add(this.txtEstado);
-            this.Controls.Add(this.lblEstado);
-            this.Controls.Add(this.txtSueldo);
-            this.Controls.Add(this.lblSueldo);
-            this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.lblDNI);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.lblApellido);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.lblNombre);
-            this.Name = "EmpleadoDetailsForm";
-            this.Text = "Nuevo empleado";
-            this.AcceptButton = this.btnSave;
-            this.CancelButton = this.btnCancel;
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new Size(1191, 455);
+            Controls.Add(txtContrasenia);
+            Controls.Add(label1);
+            Controls.Add(btnCancel);
+            Controls.Add(btnSave);
+            Controls.Add(dtpFechaIngreso);
+            Controls.Add(lblFecha);
+            Controls.Add(txtEstado);
+            Controls.Add(lblEstado);
+            Controls.Add(txtSueldo);
+            Controls.Add(lblSueldo);
+            Controls.Add(txtDNI);
+            Controls.Add(lblDNI);
+            Controls.Add(txtApellido);
+            Controls.Add(lblApellido);
+            Controls.Add(txtNombre);
+            Controls.Add(lblNombre);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "EmpleadoDetailsForm";
+            Text = "Nuevo empleado";
+            ResumeLayout(false);
+            PerformLayout();
         }
         #endregion
 
@@ -152,5 +208,7 @@
         private TextBox txtNombre, txtApellido, txtDNI, txtSueldo, txtEstado;
         private DateTimePicker dtpFechaIngreso;
         private Button btnSave, btnCancel;
+        private TextBox txtContrasenia;
+        private Label label1;
     }
 }

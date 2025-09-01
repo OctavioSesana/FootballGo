@@ -57,6 +57,7 @@ namespace Data
                 existingCliente.SetDNI(cliente.dni);
                 existingCliente.SetTelefono(cliente.telefono);
                 existingCliente.SetFechaAlta(cliente.FechaAlta);
+                existingCliente.SetContrasenia(cliente.Contrasenia);
 
                 context.SaveChanges();
                 return true;
@@ -78,7 +79,7 @@ namespace Data
         public IEnumerable<Cliente> GetByCriteria(FootballGo.DTOs.ClienteCriteria criteria) // Fully qualify the type to resolve ambiguity
         {
             const string sql = @"
-                    SELECT Id, Nombre, Apellido, Email, dni, telefono, FechaAlta 
+                    SELECT Id, Nombre, Apellido, Email, dni, telefono, FechaAlta, Contrasenia
                     FROM Clientes 
                     WHERE Nombre LIKE @SearchTerm 
                        OR Apellido LIKE @SearchTerm 
@@ -106,7 +107,8 @@ namespace Data
                     reader.GetString(3),   // Email
                     reader.GetInt32(4),    // dni
                     reader.GetInt32(5),    // telefono
-                    reader.GetDateTime(6)  // FechaAlta
+                    reader.GetDateTime(6),  // FechaAlta
+                    reader.GetString(10)   // Contrasenia
                 );
 
                 clientes.Add(cliente);

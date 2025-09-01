@@ -12,6 +12,7 @@ namespace DTOs
         public int telefono { get; set; }
 
         public DateTime FechaAlta { get; set; }
+        public string Contrasenia { get; set; }
 
     }
 }

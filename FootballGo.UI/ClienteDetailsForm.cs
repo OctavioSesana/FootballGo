@@ -31,6 +31,7 @@ namespace FootballGo.UI
             txtNombre.Text = cliente.Nombre;
             txtApellido.Text = cliente.Apellido;
             txtEmail.Text = cliente.Email;
+            txtContrasenia.Text = cliente.Contrasenia;
             txtDNI.Text = cliente.dni.ToString();
             txtTel.Text = cliente.telefono.ToString();
             dtpFechaAlta.Value = cliente.FechaAlta;
@@ -59,7 +60,8 @@ namespace FootballGo.UI
                         txtEmail.Text,
                         int.Parse(txtDNI.Text),
                         int.Parse(txtTel.Text),
-                        dtpFechaAlta.Value
+                        dtpFechaAlta.Value,
+                        txtContrasenia.Text
                     );
                 }
                 else
@@ -71,6 +73,7 @@ namespace FootballGo.UI
                     _cliente.SetDNI(int.Parse(txtDNI.Text));
                     _cliente.SetTelefono(int.Parse(txtTel.Text));
                     _cliente.SetFechaAlta(dtpFechaAlta.Value);
+                    _cliente.SetContrasenia(txtContrasenia.Text);
                 }
 
                 // Indica que la operación fue exitosa
@@ -98,6 +101,11 @@ namespace FootballGo.UI
         }
 
         private void ClienteDetailsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -11,5 +11,6 @@ namespace DTOs
         public decimal SueldoSemanal { get; set; }
         public bool EstaActivo { get; set; }
         public DateTime FechaIngreso { get; set; }
+        public string Contrasenia { get; set; } // Agregado para manejar la contraseña
     }
 }

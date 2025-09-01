@@ -42,6 +42,8 @@
             dtpFechaAlta = new DateTimePicker();
             btnSave = new Button();
             btnCancel = new Button();
+            txtContrasenia = new TextBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lblName
@@ -56,7 +58,7 @@
             // lblTel
             // 
             lblTel.AutoSize = true;
-            lblTel.Location = new Point(12, 169);
+            lblTel.Location = new Point(12, 209);
             lblTel.Name = "lblTel";
             lblTel.Size = new Size(34, 20);
             lblTel.TabIndex = 1;
@@ -65,7 +67,7 @@
             // lblMail
             // 
             lblMail.AutoSize = true;
-            lblMail.Location = new Point(12, 134);
+            lblMail.Location = new Point(13, 141);
             lblMail.Name = "lblMail";
             lblMail.Size = new Size(49, 20);
             lblMail.TabIndex = 2;
@@ -98,14 +100,14 @@
             // 
             // txtTel
             // 
-            txtTel.Location = new Point(85, 160);
+            txtTel.Location = new Point(85, 200);
             txtTel.Name = "txtTel";
             txtTel.Size = new Size(196, 27);
             txtTel.TabIndex = 6;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(85, 127);
+            txtEmail.Location = new Point(86, 134);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(196, 27);
             txtEmail.TabIndex = 7;
@@ -127,7 +129,7 @@
             // lblFecha
             // 
             lblFecha.AutoSize = true;
-            lblFecha.Location = new Point(12, 203);
+            lblFecha.Location = new Point(12, 243);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(50, 20);
             lblFecha.TabIndex = 10;
@@ -135,14 +137,14 @@
             // 
             // dtpFechaAlta
             // 
-            dtpFechaAlta.Location = new Point(85, 196);
+            dtpFechaAlta.Location = new Point(85, 236);
             dtpFechaAlta.Name = "dtpFechaAlta";
             dtpFechaAlta.Size = new Size(250, 27);
             dtpFechaAlta.TabIndex = 11;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(85, 258);
+            btnSave.Location = new Point(85, 298);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 12;
@@ -152,7 +154,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(189, 258);
+            btnCancel.Location = new Point(189, 298);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 29);
             btnCancel.TabIndex = 13;
@@ -160,11 +162,30 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancelar_Click;
             // 
+            // txtContrasenia
+            // 
+            txtContrasenia.Location = new Point(110, 170);
+            txtContrasenia.Name = "txtContrasenia";
+            txtContrasenia.Size = new Size(174, 27);
+            txtContrasenia.TabIndex = 14;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(13, 177);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 20);
+            label1.TabIndex = 15;
+            label1.Text = "Contraseña:";
+            label1.Click += label1_Click;
+            // 
             // ClienteDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1188, 450);
+            Controls.Add(label1);
+            Controls.Add(txtContrasenia);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
             Controls.Add(dtpFechaAlta);
@@ -202,5 +223,7 @@
         private DateTimePicker dtpFechaAlta;
         private Button btnSave;
         private Button btnCancel;
+        private TextBox txtContrasenia;
+        private Label label1;
     }
 }

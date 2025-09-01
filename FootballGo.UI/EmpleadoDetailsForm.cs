@@ -22,10 +22,11 @@ namespace FootballGo.UI
 
                 txtNombre.Text = original.Nombre;
                 txtApellido.Text = original.Apellido;
-                //txtDNI.Text = original.Dni;
+                txtDNI.Text = original.Dni.ToString();
                 txtSueldo.Text = original.SueldoSemanal.ToString("0.##");
-               // chkActivo.Checked = original.EstaActivo;
+                // chkActivo.Checked = original.EstaActivo;
                 dtpFechaIngreso.Value = original.FechaIngreso;
+                txtContrasenia.Text = original.contrasenia;
             }
             else
             {
@@ -42,6 +43,12 @@ namespace FootballGo.UI
 
             if (string.IsNullOrWhiteSpace(txtApellido.Text))
             { MessageBox.Show("El apellido es obligatorio."); return; }
+
+            if (!int.TryParse(txtDNI.Text.Trim(), out int dni))
+            {
+                MessageBox.Show("DNI inválido.");
+                return;
+            }
 
             // 1) Intento con cultura actual (es-AR / es-ES etc)
             var sueldoTxt = txtSueldo.Text.Trim();
@@ -60,9 +67,11 @@ namespace FootballGo.UI
             EmpleadoEditado!.SetNombre(txtNombre.Text.Trim());
             EmpleadoEditado!.SetApellido(txtApellido.Text.Trim());
             // EmpleadoEditado!.SetDni(txtDNI.Text.Trim());
+            EmpleadoEditado!.SetDni(dni);
             EmpleadoEditado!.SetSueldoSemanal(sueldo);                       // ← AHORA SE GUARDA
-           // EmpleadoEditado!.SetEstaActivo(chkActivo.Checked);
+                                                                             // EmpleadoEditado!.SetEstaActivo(chkActivo.Checked);
             EmpleadoEditado!.SetFechaIngreso(dtpFechaIngreso.Value);
+            EmpleadoEditado!.SetContrasenia(txtContrasenia.Text.Trim());
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -74,6 +83,11 @@ namespace FootballGo.UI
         }
 
         private void lblMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

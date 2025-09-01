@@ -68,8 +68,8 @@ class Program
             var input = Console.ReadLine();
             var fechaAlta = string.IsNullOrWhiteSpace(input) ? DateTime.Today : DateTime.Parse(input);
 
-            var cliente = new Cliente(0, nombre, apellido, email, dni, telefono, fechaAlta);
-            service.Add(cliente);
+            //var cliente = new Cliente(0, nombre, apellido, email, dni, telefono, fechaAlta, contrasenia);
+            //service.Add(cliente);
             Console.WriteLine("✅ Cliente agregado.");
         }
         catch (Exception ex)

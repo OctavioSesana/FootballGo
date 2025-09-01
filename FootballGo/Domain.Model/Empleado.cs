@@ -9,6 +9,7 @@
         public decimal SueldoSemanal { get; private set; }
         public bool EstaActivo { get; private set; }
         public DateTime FechaIngreso { get; private set; }
+        public string contrasenia { get; private set; }
 
         // 🔹 Alias para que la UI pueda usar .Id como en Cliente
         public int Id => IdEmpleado;
@@ -17,7 +18,7 @@
         public Empleado() { }
 
         // 🔹 Constructor completo (como el que ya tenías)
-        public Empleado(int idEmpleado, string nombre, string apellido, int dni, decimal sueldoSemanal, bool estaActivo, DateTime fechaIngreso)
+        public Empleado(int idEmpleado, string nombre, string apellido, int dni, decimal sueldoSemanal, bool estaActivo, DateTime fechaIngreso, string contra)
         {
             IdEmpleado = idEmpleado;
             Nombre = nombre;
@@ -26,6 +27,7 @@
             SueldoSemanal = sueldoSemanal;
             EstaActivo = estaActivo;
             FechaIngreso = fechaIngreso;
+            contrasenia = contra;
         }
 
         // 🔹 Setters compatibles con Cliente
@@ -37,5 +39,6 @@
         public void SetSueldoSemanal(decimal sueldo) => SueldoSemanal = sueldo;
         public void SetEstaActivo(bool activo) => EstaActivo = activo;
         public void SetFechaIngreso(DateTime fecha) => FechaIngreso = fecha;
+        public void SetContrasenia(string contra) => contrasenia = contra;
     }
 }

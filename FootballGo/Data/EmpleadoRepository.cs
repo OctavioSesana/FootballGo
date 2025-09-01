@@ -57,6 +57,7 @@ namespace Data
                 existingEmpleado.SetSueldoSemanal(empleado.SueldoSemanal);
                 existingEmpleado.SetEstaActivo(empleado.EstaActivo);
                 existingEmpleado.SetFechaIngreso(empleado.FechaIngreso);
+                existingEmpleado.SetContrasenia(empleado.contrasenia);
 
                 context.SaveChanges();
                 return true;
@@ -68,7 +69,7 @@ namespace Data
         public IEnumerable<Empleado> GetByCriteria(FootballGo.DTOs.EmpleadoCriteria criteria) // Fully qualify the type to resolve ambiguity
         {
             const string sql = @"
-                    SELECT IdEmpleado, Nombre, Apellido, Dni, EstaActivo, FechaIngreso 
+                    SELECT IdEmpleado, Nombre, Apellido, Dni, EstaActivo, FechaIngreso, SueldoSemanal, contrasenia
                     FROM Empleados 
                     WHERE Nombre LIKE @SearchTerm 
                        OR Apellido LIKE @SearchTerm 
@@ -96,7 +97,8 @@ namespace Data
                     reader.GetInt32(8),   // Dni
                     reader.GetDecimal(4),  // SueldoSemanal
                     reader.GetBoolean(5),  // EstaActivo
-                    reader.GetDateTime(6)  // FechaIngreso
+                    reader.GetDateTime(6),  // FechaIngreso
+                    reader.GetString(10)    // contrasenia
                 );
             }
 
