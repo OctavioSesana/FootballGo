@@ -76,6 +76,13 @@ namespace Data
             return query.Any();
         }
 
+        public Cliente? GetByEmail(string email)
+        {
+            using var context = CreateContext();
+            return context.Clientes.FirstOrDefault(c => c.Email.ToLower() == email.ToLower());
+        }
+
+
         public IEnumerable<Cliente> GetByCriteria(FootballGo.DTOs.ClienteCriteria criteria) // Fully qualify the type to resolve ambiguity
         {
             const string sql = @"

@@ -13,6 +13,17 @@ namespace Domain.Services
             _repo = new ClienteRepository();
         }
 
+        public Cliente? Login(string email, string contrasenia)
+        {
+            var cliente = _repo.GetByEmail(email);
+
+            if (cliente == null)
+                return null;
+
+            return cliente.Contrasenia == contrasenia ? cliente : null;
+        }
+
+
         public void Add(Cliente cliente) => _repo.Add(cliente);
 
         public bool Delete(int id) => _repo.Delete(id);

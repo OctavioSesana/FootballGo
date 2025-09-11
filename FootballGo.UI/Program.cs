@@ -23,6 +23,7 @@ namespace FootballGo.UI
             services.AddScoped<EmpleadoService>();
             services.AddScoped<Form1>();
             services.AddScoped<Form2>();
+            services.AddScoped<LoginForm>();
             services.AddScoped<MenuForm>();
 
             var provider = services.BuildServiceProvider();

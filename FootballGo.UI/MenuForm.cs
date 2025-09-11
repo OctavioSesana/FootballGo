@@ -16,9 +16,15 @@ namespace FootballGo.UI
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
-            var formClientes = (Form1)_provider.GetService(typeof(Form1));
-            formClientes.ShowDialog();
+            var loginForm = (LoginForm)_provider.GetService(typeof(LoginForm));
+            if (loginForm.ShowDialog() == DialogResult.OK && loginForm.ClienteLogueado != null)
+            {
+                var dashboard = new ClienteDashboardForm(loginForm.ClienteLogueado);
+                dashboard.ShowDialog();
+            }
         }
+
+
 
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
