@@ -39,6 +39,12 @@ namespace Data
             return context.Empleados.Find(IdEmpleado);
         }
 
+        public Empleado? GetByDni(int dni)
+        {
+            using var context = CreateContext();
+            return context.Empleados.FirstOrDefault(e => e.Dni == dni);
+        }
+
         public IEnumerable<Empleado> GetAll()
         {
             using var context = CreateContext();

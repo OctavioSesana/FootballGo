@@ -24,12 +24,14 @@ namespace FootballGo.UI
             }
         }
 
-
-
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
-            var formEmpleados = (Form2)_provider.GetService(typeof(Form2));
-            formEmpleados.ShowDialog();
+            var loginForm = (EmpleadoLoginForm)_provider.GetService(typeof(EmpleadoLoginForm));
+            if (loginForm.ShowDialog() == DialogResult.OK && loginForm.EmpleadoLogueado != null)
+            {
+                var dashboard = new EmpleadoDashboardForm(loginForm.EmpleadoLogueado);
+                dashboard.ShowDialog();
+            }
         }
     }
 }

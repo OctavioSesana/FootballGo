@@ -1,12 +1,12 @@
 ﻿namespace FootballGo.UI
 {
-    partial class ClienteDashboardForm
+    partial class EmpleadoDashboardForm
     {
         private System.ComponentModel.IContainer components = null;
         private Label lblSesion;
         private Button btnCerrarSesion;
         private Button btnGestionarPerfil;
-        private Button btnReservarCancha;
+        private Button btnBajaCuenta;
 
         protected override void Dispose(bool disposing)
         {
@@ -20,8 +20,9 @@
             lblSesion = new Label();
             btnCerrarSesion = new Button();
             btnGestionarPerfil = new Button();
-            btnReservarCancha = new Button();
-            btnDelete = new Button();
+            btnBajaCuenta = new Button();
+            btnAlta = new Button();
+            btnGestion = new Button();
             SuspendLayout();
             // 
             // lblSesion
@@ -29,9 +30,9 @@
             lblSesion.AutoSize = true;
             lblSesion.Location = new Point(30, 20);
             lblSesion.Name = "lblSesion";
-            lblSesion.Size = new Size(194, 20);
+            lblSesion.Size = new Size(235, 20);
             lblSesion.TabIndex = 0;
-            lblSesion.Text = "Sesión iniciada como: (user)";
+            lblSesion.Text = "Sesión iniciada como: (empleado)";
             // 
             // btnCerrarSesion
             // 
@@ -53,42 +54,54 @@
             btnGestionarPerfil.UseVisualStyleBackColor = true;
             btnGestionarPerfil.Click += btnGestionarPerfil_Click;
             // 
-            // btnReservarCancha
+            // btnBajaCuenta
             // 
-            btnReservarCancha.Location = new Point(30, 160);
-            btnReservarCancha.Name = "btnReservarCancha";
-            btnReservarCancha.Size = new Size(150, 30);
-            btnReservarCancha.TabIndex = 3;
-            btnReservarCancha.Text = "Reservar cancha";
-            btnReservarCancha.UseVisualStyleBackColor = true;
-            btnReservarCancha.Click += btnReservarCancha_Click;
+            btnBajaCuenta.Location = new Point(30, 160);
+            btnBajaCuenta.Name = "btnBajaCuenta";
+            btnBajaCuenta.Size = new Size(150, 30);
+            btnBajaCuenta.TabIndex = 3;
+            btnBajaCuenta.Text = "Baja de cuenta";
+            btnBajaCuenta.UseVisualStyleBackColor = true;
+            btnBajaCuenta.Click += btnBajaCuenta_Click;
             // 
-            // btnDelete
+            // btnAlta
             // 
-            btnDelete.Location = new Point(30, 207);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(150, 29);
-            btnDelete.TabIndex = 4;
-            btnDelete.Text = "Eliminar cuenta";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            btnAlta.Location = new Point(30, 208);
+            btnAlta.Name = "btnAlta";
+            btnAlta.Size = new Size(150, 30);
+            btnAlta.TabIndex = 4;
+            btnAlta.Text = "Alta de cancha";
+            btnAlta.UseVisualStyleBackColor = true;
+            btnAlta.Click += btnAlta_Click;
             // 
-            // ClienteDashboardForm
+            // btnGestion
+            // 
+            btnGestion.Location = new Point(30, 257);
+            btnGestion.Name = "btnGestion";
+            btnGestion.Size = new Size(150, 30);
+            btnGestion.TabIndex = 5;
+            btnGestion.Text = "Gestionar reservas";
+            btnGestion.UseVisualStyleBackColor = true;
+            btnGestion.Click += btnGestion_Click;
+            // 
+            // EmpleadoDashboardForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(400, 288);
-            Controls.Add(btnDelete);
-            Controls.Add(btnReservarCancha);
+            ClientSize = new Size(432, 299);
+            Controls.Add(btnGestion);
+            Controls.Add(btnAlta);
+            Controls.Add(btnBajaCuenta);
             Controls.Add(btnGestionarPerfil);
             Controls.Add(btnCerrarSesion);
             Controls.Add(lblSesion);
-            Name = "ClienteDashboardForm";
-            Text = "Panel de Usuario";
-            Load += ClienteDashboardForm_Load;
+            Name = "EmpleadoDashboardForm";
+            Text = "Panel de Empleado";
+            Load += EmpleadoDashboardForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
-        private Button btnDelete;
+        private Button btnAlta;
+        private Button btnGestion;
     }
 }
