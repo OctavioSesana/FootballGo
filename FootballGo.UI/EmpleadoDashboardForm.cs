@@ -8,11 +8,13 @@ namespace FootballGo.UI
     public partial class EmpleadoDashboardForm : Form
     {
         private Empleado _empleado;
+        private readonly MenuForm _menuForm;
 
-        public EmpleadoDashboardForm(Empleado empleado)
+        public EmpleadoDashboardForm(Empleado empleado, MenuForm menuForm)
         {
             InitializeComponent();
             _empleado = empleado;
+            _menuForm = menuForm;
         }
 
         private void EmpleadoDashboardForm_Load(object sender, EventArgs e)
@@ -22,35 +24,14 @@ namespace FootballGo.UI
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Abort; // vuelve al login/menú
-            Close();
+            _menuForm.CerrarSesion();
         }
 
         private void btnGestionarPerfil_Click(object sender, EventArgs e)
         {
-            var perfilForm = new EmpleadoDetailsForm(_empleado);
-            if (perfilForm.ShowDialog() == DialogResult.OK)
-            {
-                var empleadoActualizado = perfilForm.EmpleadoEditado;
-                if (empleadoActualizado != null)
-                {
-                    var service = new EmpleadoService();
-                    if (service.Update(empleadoActualizado))
-                    {
-                        MessageBox.Show("Perfil actualizado con éxito", "Éxito",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // refresco el objeto local
-                        _empleado = empleadoActualizado;
-                        lblSesion.Text = $"Sesión iniciada como: ({_empleado.Nombre} {_empleado.Apellido})";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al actualizar el perfil", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            var perfilForm = new EmpleadoDetailsForm(_empleado, _menuForm);
+            _menuForm.MostrarEnPanel(perfilForm);
         }
 
         private void btnBajaCuenta_Click(object sender, EventArgs e)
@@ -82,15 +63,21 @@ namespace FootballGo.UI
             }
         }
 
-        private void btnAlta_Click(object sender, EventArgs e)
+        private void btnAlta_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidad de alta de empleados no implementada.", "Info",
+            MessageBox.Show("Funcionalidad de alta de canchas no implementada.", "Info",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnArticulosAlta_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("Funcionalidad de alta de artículos no implementada.", "Info",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnGestion_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidad de gestión de empleados no implementada.", "Info",
+            MessageBox.Show("Funcionalidad de gestión de reservas no implementada.", "Info",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

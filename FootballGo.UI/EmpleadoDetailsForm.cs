@@ -1,41 +1,57 @@
-﻿using System;
+﻿using Domain.Model;
+using Domain.Services;
+using System;
 using System.Globalization;
 using System.Windows.Forms;
-using Domain.Model;
 
 namespace FootballGo.UI
 {
     public partial class EmpleadoDetailsForm : Form
     {
-        public Empleado? EmpleadoEditado { get; private set; }
+        private Empleado _empleado;
+        private readonly MenuForm _menuForm;
+        private readonly bool _esRegistro; // true si es registro, false si es edición
 
-        public EmpleadoDetailsForm(Empleado? original = null)
+        // Constructor para nuevo empleado
+        public EmpleadoDetailsForm(MenuForm menuForm, bool esRegistro = true, Empleado? empleado = null)
         {
             InitializeComponent();
-            Text = original == null ? "Nuevo empleado" : "Editar empleado";
+            _menuForm = menuForm;
+            _esRegistro = esRegistro;
+            _empleado = empleado;
 
-            if (original != null)
+            if (_esRegistro)
             {
-                // clonado superficial: conservar Id
-                EmpleadoEditado = new Empleado();
-                EmpleadoEditado.SetId(original.Id);
-
-                txtNombre.Text = original.Nombre;
-                txtApellido.Text = original.Apellido;
-                txtDNI.Text = original.Dni.ToString();
-                txtSueldo.Text = original.SueldoSemanal.ToString("0.##");
-                // chkActivo.Checked = original.EstaActivo;
-                dtpFechaIngreso.Value = original.FechaIngreso;
-                txtContrasenia.Text = original.contrasenia;
+                Text = "Registrar Cliente";
             }
             else
             {
-                EmpleadoEditado = new Empleado();
-                dtpFechaIngreso.Value = DateTime.Now;
+                Text = "Editar Perfil";
+                if (_empleado != null)
+                    CargarDatosEnFormulario(_empleado);
             }
         }
 
-        // ==== ESTE MÉTODO ES EL QUE FALTA ====
+        // Constructor para edición
+        public EmpleadoDetailsForm(Empleado empleadoAEditar, MenuForm menuForm)
+        {
+            InitializeComponent();
+            this.Text = "Editar Empleado";
+            _menuForm = menuForm;
+            _empleado = empleadoAEditar;
+            CargarDatosEnFormulario(empleadoAEditar);
+        }
+
+        private void CargarDatosEnFormulario(Empleado empleado)
+        {
+            txtNombre.Text = empleado.Nombre;
+            txtApellido.Text = empleado.Apellido;
+            txtDNI.Text = empleado.Dni.ToString();
+            txtSueldo.Text = empleado.SueldoSemanal.ToString("N2", CultureInfo.CurrentCulture);
+            dtpFechaIngreso.Value = empleado.FechaIngreso;
+            txtContrasenia.Text = empleado.contrasenia;
+        }
+
         private void btnGuardar_Click(object? sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -50,12 +66,10 @@ namespace FootballGo.UI
                 return;
             }
 
-            // 1) Intento con cultura actual (es-AR / es-ES etc)
             var sueldoTxt = txtSueldo.Text.Trim();
             decimal sueldo;
             if (!decimal.TryParse(sueldoTxt, NumberStyles.Number, CultureInfo.CurrentCulture, out sueldo))
             {
-                // 2) Plan B: normalizo (quito miles y uso punto como decimal)
                 var normalized = sueldoTxt.Replace(".", "").Replace(",", ".");
                 if (!decimal.TryParse(normalized, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out sueldo))
                 {
@@ -64,32 +78,56 @@ namespace FootballGo.UI
                 }
             }
 
-            EmpleadoEditado!.SetNombre(txtNombre.Text.Trim());
-            EmpleadoEditado!.SetApellido(txtApellido.Text.Trim());
-            // EmpleadoEditado!.SetDni(txtDNI.Text.Trim());
-            EmpleadoEditado!.SetDni(dni);
-            EmpleadoEditado!.SetSueldoSemanal(sueldo);                       // ← AHORA SE GUARDA
-                                                                             // EmpleadoEditado!.SetEstaActivo(chkActivo.Checked);
-            EmpleadoEditado!.SetFechaIngreso(dtpFechaIngreso.Value);
-            EmpleadoEditado!.SetContrasenia(txtContrasenia.Text.Trim());
+            try
+            {
+                _empleado.SetNombre(txtNombre.Text.Trim());
+                _empleado.SetApellido(txtApellido.Text.Trim());
+                _empleado.SetDni(dni);
+                _empleado.SetSueldoSemanal(sueldo);
+                _empleado.SetFechaIngreso(dtpFechaIngreso.Value);
+                _empleado.SetContrasenia(txtContrasenia.Text.Trim());
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+                var service = new EmpleadoService();
+                if (_empleado.Id == 0)
+                {
+                    service.Add(_empleado);
+                }
+                else
+                {
+                    service.Update(_empleado);
+                }
+
+                MessageBox.Show("Empleado guardado con éxito", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // volvemos al dashboard
+                var dashboard = new EmpleadoDashboardForm(_empleado, _menuForm);
+                _menuForm.MostrarEnPanel(dashboard);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void btnCancelar_Click(object? sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel; // cierra el form sin guardar
+            if (_esRegistro)
+            {
+                // Si era registro, volvemos al login
+                _menuForm.MostrarEnPanel(new EmpleadoLoginForm(_menuForm));
+            }
+            else
+            {
+                // Si era edición, volvemos al dashboard del cliente
+                if (_empleado != null)
+                {
+                    var dashboard = new EmpleadoDashboardForm(_empleado, _menuForm);
+                    _menuForm.MostrarEnPanel(dashboard);
+                }
+            }
         }
 
-        private void lblMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

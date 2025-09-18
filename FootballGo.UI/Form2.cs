@@ -1,4 +1,4 @@
-using Domain.Model;
+﻿using Domain.Model;
 using Domain.Services;
 using System;
 using System.Collections.Generic;
@@ -7,13 +7,16 @@ using System.Windows.Forms;
 
 namespace FootballGo.UI
 {
-    public partial class Form2 : Form
+    public partial class dgvClientes : Form
     {
-        private readonly EmpleadoService _empleadoService = new EmpleadoService();
+        private readonly EmpleadoService _empleadoService;
+        private readonly MenuForm _menuForm;
 
-        public Form2()
+        public dgvClientes(EmpleadoService empleadoService, MenuForm menuForm)
         {
             InitializeComponent();
+            _empleadoService = empleadoService ?? throw new ArgumentNullException(nameof(empleadoService));
+            _menuForm = menuForm;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -26,7 +29,7 @@ namespace FootballGo.UI
             try
             {
                 IEnumerable<Empleado> empleados = _empleadoService.GetAll();
-                dgvCliente.DataSource = null;
+                dgvCliente.DataSource = null; // Corrected to use 'dgvCliente' instead of 'dgvClientes'
                 dgvCliente.DataSource = empleados.ToList();
                 dgvCliente.ReadOnly = true;
                 dgvCliente.AllowUserToAddRows = false;
@@ -35,19 +38,16 @@ namespace FootballGo.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurri� un error al cargar los empleados: {ex.Message}",
+                MessageBox.Show($"Ocurrió un error al cargar los empleados: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            using var frm = new EmpleadoDetailsForm();
-            if (frm.ShowDialog(this) == DialogResult.OK && frm.EmpleadoEditado != null)
-            {
-                _empleadoService.Add(frm.EmpleadoEditado);
-                CargarEmpleados();
-            }
+            // Alta de empleado → mostramos el form dentro del panel
+            var frm = new EmpleadoDetailsForm(_menuForm);
+            _menuForm.MostrarEnPanel(frm);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -65,12 +65,9 @@ namespace FootballGo.UI
                 return;
             }
 
-            using var frm = new EmpleadoDetailsForm(seleccionado);
-            if (frm.ShowDialog(this) == DialogResult.OK && frm.EmpleadoEditado != null)
-            {
-                _empleadoService.Update(frm.EmpleadoEditado);
-                CargarEmpleados();
-            }
+            // Edición → mostramos el form dentro del panel
+            var frm = new EmpleadoDetailsForm(seleccionado, _menuForm);
+            _menuForm.MostrarEnPanel(frm);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -82,22 +79,21 @@ namespace FootballGo.UI
             }
 
             var seleccionado = dgvCliente.SelectedRows[0].DataBoundItem as Empleado;
-            if (seleccionado == null) { MessageBox.Show("No se pudo obtener el empleado."); return; }
+            if (seleccionado == null)
+            {
+                MessageBox.Show("No se pudo obtener el empleado.");
+                return;
+            }
 
             if (MessageBox.Show(
-                    $"�Est� seguro de eliminar a {seleccionado.Nombre} {seleccionado.Apellido}?",
-                    "Confirmar eliminaci�n",
+                    $"¿Está seguro de eliminar a {seleccionado.Nombre} {seleccionado.Apellido}?",
+                    "Confirmar eliminación",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                _empleadoService.Delete(seleccionado.IdEmpleado);
+                _empleadoService.Delete(seleccionado.Id);
                 CargarEmpleados();
             }
-        }
-        public Form2(EmpleadoService empleadoService)
-        {
-            _empleadoService = empleadoService ?? throw new ArgumentNullException(nameof(empleadoService));
-            InitializeComponent();
         }
     }
 }

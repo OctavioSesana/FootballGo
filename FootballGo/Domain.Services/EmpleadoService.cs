@@ -23,7 +23,7 @@ namespace Domain.Services
 
         public bool Delete(int id) => _repo.Delete(id);
 
-        public Empleado? Login(string nombre, string apellido, int dni, string contrasenia)
+        public Empleado? Login(int dni, string contrasenia)
         {
             var empleado = _repo.GetByDni(dni);
 
@@ -31,8 +31,8 @@ namespace Domain.Services
                 return null;
 
             // Validamos todos los datos
-            if (empleado.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase) &&
-                empleado.Apellido.Equals(apellido, StringComparison.OrdinalIgnoreCase) &&
+            if ( //empleado.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase) &&
+                // empleado.Apellido.Equals(apellido, StringComparison.OrdinalIgnoreCase) &&
                 empleado.Dni == dni &&
                 empleado.contrasenia == contrasenia)
             {

@@ -1,6 +1,6 @@
 ﻿namespace FootballGo.UI
 {
-    public partial class Form2 : Form
+    public partial class dgvClientes : Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -74,7 +74,7 @@
             btnAgregar.UseVisualStyleBackColor = true;
             btnAgregar.Click += btnAgregar_Click;
             // 
-            // Form2
+            // dgvClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -83,7 +83,7 @@
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
             Controls.Add(dgvCliente);
-            Name = "Form2";
+            Name = "dgvClientes";
             Text = "Empleados";
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCliente).EndInit();

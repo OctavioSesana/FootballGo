@@ -1,4 +1,5 @@
 ﻿using Domain.Model;
+using Domain.Services;
 using System;
 using System.Windows.Forms;
 
@@ -6,26 +7,40 @@ namespace FootballGo.UI
 {
     public partial class ClienteDetailsForm : Form
     {
-        // Esta variable guardará el cliente que estamos editando. Si es nulo, estamos agregando uno nuevo.
-        private Cliente? _cliente;
+        private Cliente _cliente;
+        private readonly MenuForm _menuForm;
+        private readonly bool _esRegistro; // true si es registro, false si es edición
 
         // Constructor para agregar un nuevo cliente
-        public ClienteDetailsForm()
+        public ClienteDetailsForm(MenuForm menuForm, bool esRegistro = true, Cliente? cliente = null)
         {
             InitializeComponent();
-            this.Text = "Agregar Cliente";
+            _menuForm = menuForm;
+            _esRegistro = esRegistro;
+            _cliente = cliente;
+
+            if (_esRegistro)
+            {
+                Text = "Registrar Cliente";
+            }
+            else
+            {
+                Text = "Editar Perfil";
+                if (_cliente != null)
+                    CargarDatosEnFormulario(_cliente);
+            }
         }
 
         // Constructor para editar un cliente existente
-        public ClienteDetailsForm(Cliente clienteAEditar)
+        public ClienteDetailsForm(Cliente clienteAEditar, MenuForm menuForm)
         {
             InitializeComponent();
             this.Text = "Editar Cliente";
+            _menuForm = menuForm;
             _cliente = clienteAEditar;
             CargarDatosEnFormulario(clienteAEditar);
         }
 
-        // Método para cargar los datos del cliente en los controles del formulario
         private void CargarDatosEnFormulario(Cliente cliente)
         {
             txtNombre.Text = cliente.Nombre;
@@ -37,80 +52,68 @@ namespace FootballGo.UI
             dtpFechaAlta.Value = cliente.FechaAlta;
         }
 
-        // Lógica del botón Guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Validar que los campos no estén vacíos
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtDNI.Text))
-            {
-                MessageBox.Show("Por favor, complete al menos el nombre, apellido y DNI.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             try
             {
-                // Si _cliente es nulo, estamos creando un nuevo cliente
-                if (_cliente == null)
+                if (string.IsNullOrWhiteSpace(txtContrasenia.Text))
                 {
-                    // Crea un nuevo cliente con un ID temporal. El servicio asignará el ID final.
-                    _cliente = new Cliente(
-                        0, // ID temporal, el servicio lo actualizará
-                        txtNombre.Text,
-                        txtApellido.Text,
-                        txtEmail.Text,
-                        int.Parse(txtDNI.Text),
-                        int.Parse(txtTel.Text),
-                        dtpFechaAlta.Value,
-                        txtContrasenia.Text
-                    );
-                }
-                else
-                {
-                    // Si _cliente no es nulo, estamos editando uno existente
-                    _cliente.SetNombre(txtNombre.Text);
-                    _cliente.SetApellido(txtApellido.Text);
-                    _cliente.SetEmail(txtEmail.Text);
-                    _cliente.SetDNI(int.Parse(txtDNI.Text));
-                    _cliente.SetTelefono(int.Parse(txtTel.Text));
-                    _cliente.SetFechaAlta(dtpFechaAlta.Value);
-                    _cliente.SetContrasenia(txtContrasenia.Text);
+                    MessageBox.Show("Debe ingresar una contraseña.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
-                // Indica que la operación fue exitosa
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (ArgumentException ex)
-            {
-                // Captura las excepciones de validación de la clase Cliente
-                MessageBox.Show(ex.Message, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtContrasenia.Text.Length < 6)
+                {
+                    MessageBox.Show("La contraseña debe tener al menos 6 caracteres.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                _cliente.SetNombre(txtNombre.Text);
+                _cliente.SetApellido(txtApellido.Text);
+                _cliente.SetEmail(txtEmail.Text);
+                _cliente.SetDNI(int.Parse(txtDNI.Text));
+                _cliente.SetTelefono(int.Parse(txtTel.Text));
+                _cliente.SetFechaAlta(dtpFechaAlta.Value);
+                _cliente.SetContrasenia(txtContrasenia.Text.Trim()); // 👈 ESTA LÍNEA ES CLAVE
+
+                var service = new ClienteService();
+
+                if (_cliente.Id == 0)
+                    service.Add(_cliente);
+                else
+                    service.Update(_cliente);
+
+                MessageBox.Show("Cliente guardado con éxito", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var dashboard = new ClienteDashboardForm(_cliente, _menuForm);
+                _menuForm.MostrarEnPanel(dashboard);
             }
             catch (Exception ex)
             {
-                // Captura otros errores, como la conversión de tipos
-                MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Lógica del botón Cancelar
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            // Simplemente cierra el formulario sin hacer nada
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (_esRegistro)
+            {
+                // Si era registro, volvemos al login
+                _menuForm.MostrarEnPanel(new LoginForm(_menuForm));
+            }
+            else
+            {
+                // Si era edición, volvemos al dashboard del cliente
+                if (_cliente != null)
+                {
+                    var dashboard = new ClienteDashboardForm(_cliente, _menuForm);
+                    _menuForm.MostrarEnPanel(dashboard);
+                }
+            }
         }
-
-        private void ClienteDetailsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        // Propiedad para acceder al cliente desde el formulario principal
-        public Cliente? ClienteResult => _cliente;
     }
 }

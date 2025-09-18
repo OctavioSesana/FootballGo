@@ -10,11 +10,13 @@ namespace FootballGo.UI
     public partial class Form1 : Form
     {
         private readonly ClienteService _clienteService;
+        private readonly MenuForm _menuForm;
 
-        public Form1(ClienteService clienteService)
+        public Form1(ClienteService clienteService, MenuForm menuForm)
         {
             InitializeComponent();
             _clienteService = clienteService;
+            _menuForm = menuForm;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -82,16 +84,9 @@ namespace FootballGo.UI
 
                 if (clienteSeleccionado != null)
                 {
-                    var clienteDetailsForm = new ClienteDetailsForm(clienteSeleccionado);
-                    if (clienteDetailsForm.ShowDialog() == DialogResult.OK)
-                    {
-                        Cliente? clienteActualizado = clienteDetailsForm.ClienteResult;
-                        if (clienteActualizado != null)
-                        {
-                            _clienteService.Update(clienteActualizado);
-                            CargarClientes();
-                        }
-                    }
+                    // en vez de abrir una ventana modal, mostramos el ClienteDetailsForm en el panel
+                    var clienteDetailsForm = new ClienteDetailsForm(clienteSeleccionado, _menuForm);
+                    _menuForm.MostrarEnPanel(clienteDetailsForm);
                 }
             }
             else
@@ -103,17 +98,9 @@ namespace FootballGo.UI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            var clienteDetailsForm = new ClienteDetailsForm();
-
-            if (clienteDetailsForm.ShowDialog() == DialogResult.OK)
-            {
-                Cliente? nuevoCliente = clienteDetailsForm.ClienteResult;
-                if (nuevoCliente != null)
-                {
-                    _clienteService.Add(nuevoCliente);
-                    CargarClientes();
-                }
-            }
+            // en vez de abrir modal, mostramos en el panel
+            var clienteDetailsForm = new ClienteDetailsForm(_menuForm);
+            _menuForm.MostrarEnPanel(clienteDetailsForm);
         }
     }
 }

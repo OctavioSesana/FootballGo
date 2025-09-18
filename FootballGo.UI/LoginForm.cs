@@ -8,13 +8,16 @@ namespace FootballGo.UI
     public partial class LoginForm : Form
     {
         private readonly ClienteService _clienteService;
+        private readonly MenuForm _menuForm;
 
         public Cliente? ClienteLogueado { get; private set; }
 
-        public LoginForm()
+        // ahora recibe referencia al MenuForm
+        public LoginForm(MenuForm menuForm)
         {
             InitializeComponent();
             _clienteService = new ClienteService();
+            _menuForm = menuForm;
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -34,8 +37,13 @@ namespace FootballGo.UI
             if (cliente != null)
             {
                 ClienteLogueado = cliente;
-                DialogResult = DialogResult.OK;
-                Close();
+
+                // Mostrar bienvenida en el MenuForm
+                _menuForm.MostrarBienvenidaUsuario(cliente.Nombre, cliente.Apellido, "Cliente");
+
+                // Mostrar dashboard en el panel
+                var dashboard = new ClienteDashboardForm(cliente, _menuForm);
+                _menuForm.MostrarEnPanel(dashboard);
             }
             else
             {
@@ -46,17 +54,9 @@ namespace FootballGo.UI
 
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            var registroForm = new ClienteDetailsForm();
-            if (registroForm.ShowDialog() == DialogResult.OK)
-            {
-                var nuevoCliente = registroForm.ClienteResult;
-                if (nuevoCliente != null)
-                {
-                    _clienteService.Add(nuevoCliente);
-                    MessageBox.Show("Registro exitoso. Ahora puede iniciar sesión.",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            // Mostrar el formulario de registro dentro del mismo panel
+            var registroForm = new ClienteDetailsForm(_menuForm, esRegistro: true);
+            _menuForm.MostrarEnPanel(registroForm);
         }
     }
 }

@@ -35,11 +35,11 @@
         //public void SetContrasenia(string contrasenia) => Contrasenia = contrasenia;
         public void SetContrasenia(string contrasenia)
         {
-            if (string.IsNullOrWhiteSpace(contrasenia))
-                throw new ArgumentException("La contraseña no puede estar vacía.", nameof(contrasenia));
+            /* if (string.IsNullOrWhiteSpace(contrasenia))
+                throw new ArgumentException("La contraseña no puede estar vacía.", nameof(contrasenia)); */
 
-            if (contrasenia.Length < 6)
-                throw new ArgumentException("La contraseña debe tener al menos 6 caracteres.", nameof(contrasenia));
+            /* if (contrasenia.Length < 6)
+                throw new ArgumentException("La contraseña debe tener al menos 6 caracteres.", nameof(contrasenia)); */
 
             Contrasenia = contrasenia;
         }

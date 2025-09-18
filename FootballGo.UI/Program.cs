@@ -22,7 +22,7 @@ namespace FootballGo.UI
             services.AddScoped<ClienteService>();
             services.AddScoped<EmpleadoService>();
             services.AddScoped<Form1>();
-            services.AddScoped<Form2>();
+            services.AddScoped<dgvClientes>();
             services.AddScoped<LoginForm>();
             services.AddScoped<MenuForm>();
             services.AddTransient<EmpleadoLoginForm>();

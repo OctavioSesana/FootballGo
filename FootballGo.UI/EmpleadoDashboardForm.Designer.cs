@@ -3,10 +3,14 @@
     partial class EmpleadoDashboardForm
     {
         private System.ComponentModel.IContainer components = null;
+
         private Label lblSesion;
         private Button btnCerrarSesion;
         private Button btnGestionarPerfil;
         private Button btnBajaCuenta;
+        private Button btnAlta;
+        private Button btnGestion;
+        private Button btnArticulosAlta;
 
         protected override void Dispose(bool disposing)
         {
@@ -23,6 +27,7 @@
             btnBajaCuenta = new Button();
             btnAlta = new Button();
             btnGestion = new Button();
+            btnArticulosAlta = new Button();
             SuspendLayout();
             // 
             // lblSesion
@@ -38,7 +43,7 @@
             // 
             btnCerrarSesion.Location = new Point(30, 60);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(120, 30);
+            btnCerrarSesion.Size = new Size(150, 30);
             btnCerrarSesion.TabIndex = 1;
             btnCerrarSesion.Text = "Cerrar sesión";
             btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -66,17 +71,17 @@
             // 
             // btnAlta
             // 
-            btnAlta.Location = new Point(30, 208);
+            btnAlta.Location = new Point(30, 210);
             btnAlta.Name = "btnAlta";
             btnAlta.Size = new Size(150, 30);
             btnAlta.TabIndex = 4;
             btnAlta.Text = "Alta de cancha";
             btnAlta.UseVisualStyleBackColor = true;
-            btnAlta.Click += btnAlta_Click;
+            btnAlta.Click += btnAlta_Click_1;
             // 
             // btnGestion
             // 
-            btnGestion.Location = new Point(30, 257);
+            btnGestion.Location = new Point(30, 260);
             btnGestion.Name = "btnGestion";
             btnGestion.Size = new Size(150, 30);
             btnGestion.TabIndex = 5;
@@ -84,11 +89,22 @@
             btnGestion.UseVisualStyleBackColor = true;
             btnGestion.Click += btnGestion_Click;
             // 
+            // btnArticulosAlta
+            // 
+            btnArticulosAlta.Location = new Point(30, 310);
+            btnArticulosAlta.Name = "btnArticulosAlta";
+            btnArticulosAlta.Size = new Size(150, 30);
+            btnArticulosAlta.TabIndex = 6;
+            btnArticulosAlta.Text = "Alta artículos";
+            btnArticulosAlta.UseVisualStyleBackColor = true;
+            btnArticulosAlta.Click += btnArticulosAlta_Click_1;
+            // 
             // EmpleadoDashboardForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 299);
+            ClientSize = new Size(450, 380);
+            Controls.Add(btnArticulosAlta);
             Controls.Add(btnGestion);
             Controls.Add(btnAlta);
             Controls.Add(btnBajaCuenta);
@@ -101,7 +117,5 @@
             ResumeLayout(false);
             PerformLayout();
         }
-        private Button btnAlta;
-        private Button btnGestion;
     }
 }
