@@ -102,5 +102,7 @@ namespace FootballGo.UI
             var clienteDetailsForm = new ClienteDetailsForm(_menuForm);
             _menuForm.MostrarEnPanel(clienteDetailsForm);
         }
+
+        
     }
 }
