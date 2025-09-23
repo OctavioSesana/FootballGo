@@ -28,6 +28,7 @@
             btnAlta = new Button();
             btnGestion = new Button();
             btnArticulosAlta = new Button();
+            btnListadoCanchas = new Button();
             SuspendLayout();
             // 
             // lblSesion
@@ -99,11 +100,22 @@
             btnArticulosAlta.UseVisualStyleBackColor = true;
             btnArticulosAlta.Click += btnArticulosAlta_Click_1;
             // 
+            // btnListadoCanchas
+            // 
+            btnListadoCanchas.Location = new Point(30, 365);
+            btnListadoCanchas.Name = "btnListadoCanchas";
+            btnListadoCanchas.Size = new Size(150, 29);
+            btnListadoCanchas.TabIndex = 7;
+            btnListadoCanchas.Text = "Listado Canchas";
+            btnListadoCanchas.UseVisualStyleBackColor = true;
+            btnListadoCanchas.Click += btnListadoCanchas_Click;
+            // 
             // EmpleadoDashboardForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 380);
+            ClientSize = new Size(450, 423);
+            Controls.Add(btnListadoCanchas);
             Controls.Add(btnArticulosAlta);
             Controls.Add(btnGestion);
             Controls.Add(btnAlta);
@@ -117,5 +129,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Button btnListadoCanchas;
     }
 }

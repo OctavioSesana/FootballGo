@@ -49,5 +49,13 @@ namespace Data
             using var db = new FootballGoDbContext();
             return db.Canchas.FirstOrDefault(x => x.NroCancha == nro);
         }
+
+        public void Delete(Cancha c)
+        {
+            using var db = new FootballGoDbContext();
+            db.Canchas.Remove(c);
+            db.SaveChanges();
+        }
+
     }
 }

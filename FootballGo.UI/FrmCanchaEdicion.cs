@@ -1,43 +1,58 @@
 ﻿using System;
 using System.Windows.Forms;
-using Domain.Model;       // EstadoCancha
-using Domain.Services;    // CanchaService
+using Domain.Model;
+using Domain.Services;
 
 namespace FootballGo.UI
 {
     public partial class FrmCanchaEdicion : Form
     {
         private readonly CanchaService _service = new CanchaService();
+        private readonly Cancha? _cancha;  // null = alta, != null = edición
 
-        public FrmCanchaEdicion()
+        public FrmCanchaEdicion()  // Alta
         {
             InitializeComponent();
-            // Si el diseñador no creó estos handlers:
-            // this.Load += FrmCanchaEdicion_Load;
-            // btnGuardar.Click += btnGuardar_Click;
-            // btnCancelar.Click += btnCancelar_Click;
+        }
+
+        public FrmCanchaEdicion(Cancha cancha) : this()  // Edición
+        {
+            _cancha = cancha;     // 👈 clave: guardamos la seleccionada
         }
 
         private void FrmCanchaEdicion_Load(object? sender, EventArgs e)
         {
-            // Estado de cancha
+            // Estado
             cboEstado.DataSource = Enum.GetValues(typeof(EstadoCancha));
 
-            // Nro
+            // Número
             nudNro.Minimum = 1;
 
             // Tipo (5 o 7)
             cboTipoCancha.Items.Clear();
             cboTipoCancha.Items.Add(5);
             cboTipoCancha.Items.Add(7);
-            cboTipoCancha.SelectedIndex = 0;
 
             // Precio
             nudPrecio.DecimalPlaces = 2;
             nudPrecio.Minimum = 0;
-            nudPrecio.Maximum = 10000; // ajustá a tu realidad
+            nudPrecio.Maximum = 10000;
 
-            Text = "Alta de cancha";
+            if (_cancha != null)
+            {
+                // --- MODO EDICIÓN ---
+                nudNro.Value = _cancha.NroCancha;
+                cboEstado.SelectedItem = _cancha.EstadoCancha;
+                cboTipoCancha.SelectedItem = _cancha.TipoCancha;
+                nudPrecio.Value = _cancha.PrecioPorHora;
+                Text = $"Editar cancha #{_cancha.NroCancha}";
+            }
+            else
+            {
+                // --- MODO ALTA ---
+                cboTipoCancha.SelectedIndex = 0;
+                Text = "Alta de cancha";
+            }
         }
 
         private void btnGuardar_Click(object? sender, EventArgs e)
@@ -49,11 +64,16 @@ namespace FootballGo.UI
                 int tipo = (int)cboTipoCancha.SelectedItem!;
                 decimal precio = nudPrecio.Value;
 
-                // 👇 NUEVA firma con tipo + precio
-                _service.Crear(nro, estado, tipo, precio);
-
-                MessageBox.Show("Cancha creada correctamente.",
-                    "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (_cancha == null)
+                {
+                    _service.Crear(nro, estado, tipo, precio);              // alta
+                    MessageBox.Show("Cancha creada correctamente.", "OK");
+                }
+                else
+                {
+                    _service.Actualizar(_cancha.IdCancha, nro, estado, tipo, precio); // edición
+                    MessageBox.Show("Cancha actualizada correctamente.", "OK");
+                }
 
                 DialogResult = DialogResult.OK;
                 Close();
