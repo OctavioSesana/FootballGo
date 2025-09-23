@@ -65,8 +65,8 @@ namespace FootballGo.UI
 
         private void btnAlta_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidad de alta de canchas no implementada.", "Info",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using var frm = new FrmCanchaEdicion();
+            frm.ShowDialog(this);      // si el usuario guarda, ya se insertó en la BD
         }
 
         private void btnArticulosAlta_Click_1(object sender, EventArgs e)

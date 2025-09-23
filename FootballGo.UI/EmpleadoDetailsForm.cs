@@ -18,7 +18,7 @@ namespace FootballGo.UI
             InitializeComponent();
             _menuForm = menuForm;
             _esRegistro = esRegistro;
-            _empleado = empleado;
+            _empleado = empleado ?? new Empleado();
 
             if (_esRegistro)
             {
