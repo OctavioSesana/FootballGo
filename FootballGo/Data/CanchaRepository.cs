@@ -11,6 +11,7 @@ namespace Data
         List<Cancha> GetAll();
         Cancha? GetById(int id);
         Cancha? GetByNro(int nro);
+        void Delete(int id);
     }
 
     public class CanchaRepository : ICanchaRepository
@@ -56,6 +57,17 @@ namespace Data
             db.Canchas.Remove(c);
             db.SaveChanges();
         }
+
+        public void Delete(int id)
+        {
+            using var db = new FootballGoDbContext();
+            var cancha = db.Canchas.FirstOrDefault(c => c.IdCancha == id);
+            if (cancha == null) return;
+
+            db.Canchas.Remove(cancha);
+            db.SaveChanges();
+        }
+
 
     }
 }

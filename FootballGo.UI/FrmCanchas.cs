@@ -82,5 +82,37 @@ namespace FootballGo.UI
             if (frm.ShowDialog(this) == DialogResult.OK)
                 CargarDatos();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var sel = Seleccionada();
+            if (sel == null)
+            {
+                MessageBox.Show("Seleccioná una cancha para eliminar.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var confirmar = MessageBox.Show(
+                $"¿Seguro que querés eliminar la cancha #{sel.NroCancha}?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmar == DialogResult.Yes)
+            {
+                try
+                {
+                    _service.Eliminar(sel.IdCancha);   // 👈 elimina por ID
+                    CargarDatos();                     // refresca la grilla
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
     }
 }

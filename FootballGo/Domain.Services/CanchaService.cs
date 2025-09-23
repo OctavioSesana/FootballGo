@@ -54,6 +54,15 @@ namespace Domain.Services
             _repo.Update(existente);
         }
 
+        public void Eliminar(int id)
+        {
+            var existente = _repo.GetById(id)
+                ?? throw new InvalidOperationException("La cancha no existe.");
+
+            _repo.Delete(id);
+        }
+
+
         public List<Cancha> Listar()
         {
             return _repo.GetAll();
