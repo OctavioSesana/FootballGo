@@ -103,8 +103,8 @@ namespace FootballGo.UI
             {
                 try
                 {
-                    _service.Eliminar(sel.IdCancha);   // 👈 elimina por ID
-                    CargarDatos();                     // refresca la grilla
+                    _service.Eliminar(sel.IdCancha);   //elimina por ID
+                    CargarDatos();                     
                 }
                 catch (Exception ex)
                 {

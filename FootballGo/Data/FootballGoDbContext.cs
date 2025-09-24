@@ -18,9 +18,11 @@ namespace Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // ⚠️ Cambiá según tu servidor
+                // Servidor Emilio
                 optionsBuilder.UseSqlServer(@"Server=DESKTOP-URP6JK1\SQLEXPRESS;Database=FootballGoDB;Trusted_Connection=True;TrustServerCertificate=True");
-
+                
+                //Servidor Octa
+                //optionsBuilder.UseSqlServer(@"Server=OCTAV10\SQLEXPRESS;Database=FootballGoDB;Trusted_Connection=True;TrustServerCertificate=True");
             }
         }
 
