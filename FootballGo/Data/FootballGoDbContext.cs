@@ -12,12 +12,17 @@ namespace Data
         public DbSet<Cliente> Clientes => Set<Cliente>();
         public DbSet<Empleado> Empleados => Set<Empleado>();
 
+        public DbSet<Cancha> Canchas => Set<Cancha>();
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // ⚠️ Cambiá según tu servidor
-                optionsBuilder.UseSqlServer(@"Server=OCTAV10\SQLEXPRESS;Database=FootballGoDB;Trusted_Connection=True;TrustServerCertificate=True");
+                // Servidor Emilio
+                optionsBuilder.UseSqlServer(@"Server=DESKTOP-URP6JK1\SQLEXPRESS;Database=FootballGoDB;Trusted_Connection=True;TrustServerCertificate=True");
+                
+                //Servidor Octa
+                //optionsBuilder.UseSqlServer(@"Server=OCTAV10\SQLEXPRESS;Database=FootballGoDB;Trusted_Connection=True;TrustServerCertificate=True");
             }
         }
 
@@ -44,6 +49,30 @@ namespace Data
             e2.Property(x => x.EstaActivo).HasMaxLength(100).IsRequired();
             e2.Property(x => x.FechaIngreso).HasColumnType("datetime2").HasDefaultValueSql("GETDATE()");
 
+            var c = modelBuilder.Entity<Cancha>();
+            c.ToTable("Canchas");
+            c.HasKey(x => x.IdCancha);
+            c.Property(x => x.IdCancha).ValueGeneratedOnAdd();
+            c.Property(x => x.NroCancha).IsRequired();
+            c.HasIndex(x => x.NroCancha).IsUnique();  // nro único
+
+            c.Property(x => x.EstadoCancha)
+            .HasConversion<string>()          // almacena "Disponible/Mantenimiento/Ocupada"
+            .HasMaxLength(20)
+            .IsRequired();
+
+            c.HasCheckConstraint("CK_Canchas_Estado",
+               "EstadoCancha IN ('Disponible','Mantenimiento','Ocupada')");
+
+
+            c.Property(x => x.TipoCancha).IsRequired();
+            c.Property(x => x.PrecioPorHora)
+             .HasColumnType("decimal(10,2)")   // hasta 99999999.99
+             .IsRequired();
+
         }
+
+
+
     }
 }
