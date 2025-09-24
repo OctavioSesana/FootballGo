@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Domain.Model;
 using Domain.Services;
@@ -12,19 +13,14 @@ namespace FootballGo.UI
         public FrmCanchas()
         {
             InitializeComponent();
-            this.Load += FrmCanchas_Load;
-
-            // Opcionales si agregás los botones en el diseñador:
-            // btnRefrescar.Click += (s,e) => CargarDatos();
-            // btnCerrar.Click += (s,e) => Close();
-            // btnEditar.Click += btnEditar_Click;
-            // dgvCanchas.CellDoubleClick += (s,e) => { if (e.RowIndex >= 0) btnEditar_Click(s,e); };
+            Load += FrmCanchas_Load;
         }
 
         private void FrmCanchas_Load(object? sender, EventArgs e)
         {
             ConfigurarGrilla();
             CargarDatos();
+            dgvCanchas.CellDoubleClick += (s, ev) => { if (ev.RowIndex >= 0) AbrirEdicion(); };
         }
 
         private void ConfigurarGrilla()
@@ -36,83 +32,72 @@ namespace FootballGo.UI
             {
                 DataPropertyName = nameof(Cancha.NroCancha),
                 HeaderText = "N°",
-                Width = 60
+                Width = 70
             });
             dgvCanchas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(Cancha.EstadoCancha),
                 HeaderText = "Estado",
-                Width = 120
+                Width = 140
             });
             dgvCanchas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(Cancha.TipoCancha),
                 HeaderText = "Tipo",
-                Width = 60
+                Width = 80
             });
             dgvCanchas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(Cancha.PrecioPorHora),
                 HeaderText = "Precio/Hora",
-                Width = 100,
-                DefaultCellStyle = { Format = "C2" } // moneda
+                Width = 120,
+                DefaultCellStyle = { Format = "C2" }
             });
         }
 
-        private void CargarDatos()
+        private void CargarDatos() =>
+            dgvCanchas.DataSource = _service.Listar().OrderBy(x => x.NroCancha).ToList();
+
+        private Cancha? Seleccionada() => dgvCanchas.CurrentRow?.DataBoundItem as Cancha;
+
+        private EmpleadoDashboardForm? GetDashboard() => this.FindForm() as EmpleadoDashboardForm;
+
+        // ---- botones (conectalos en el Designer de este form) ----
+        private void btnNuevo_Click(object sender, EventArgs e)
         {
-            dgvCanchas.DataSource = _service.Listar();
+            GetDashboard()?.CargarEnPanel(new FrmCanchaEdicion());
         }
 
-        // --- Opcional: edición desde la grilla ---
-        private Cancha? Seleccionada()
-        {
-            return dgvCanchas.CurrentRow?.DataBoundItem as Cancha;
-        }
+        private void btnEditar_Click(object sender, EventArgs e) => AbrirEdicion();
 
-        private void btnEditar_Click(object? sender, EventArgs e)
+        private void AbrirEdicion()
         {
             var sel = Seleccionada();
-            if (sel == null)
-            {
-                MessageBox.Show("Seleccioná una cancha.", "Atención");
-                return;
-            }
-            using var frm = new FrmCanchaEdicion(sel);
-            if (frm.ShowDialog(this) == DialogResult.OK)
-                CargarDatos();
+            if (sel == null) { MessageBox.Show("Seleccioná una cancha."); return; }
+            GetDashboard()?.CargarEnPanel(new FrmCanchaEdicion(sel));
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             var sel = Seleccionada();
-            if (sel == null)
+            if (sel == null) { MessageBox.Show("Seleccioná una cancha."); return; }
+
+            var ok = MessageBox.Show($"¿Eliminar la cancha #{sel.NroCancha}?",
+                                     "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ok != DialogResult.Yes) return;
+
+            try
             {
-                MessageBox.Show("Seleccioná una cancha para eliminar.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                _service.Eliminar(sel.IdCancha);
+                CargarDatos();
             }
-
-            var confirmar = MessageBox.Show(
-                $"¿Seguro que querés eliminar la cancha #{sel.NroCancha}?",
-                "Confirmar eliminación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (confirmar == DialogResult.Yes)
+            catch (Exception ex)
             {
-                try
-                {
-                    _service.Eliminar(sel.IdCancha);   //elimina por ID
-                    CargarDatos();                     
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void btnRefrescar_Click(object sender, EventArgs e) => CargarDatos();
+        private void btnCerrar_Click(object sender, EventArgs e) => GetDashboard()?.CargarEnPanel(new FrmCanchas());
     }
 }

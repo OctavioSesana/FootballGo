@@ -8,51 +8,84 @@ namespace FootballGo.UI
     public partial class FrmCanchaEdicion : Form
     {
         private readonly CanchaService _service = new CanchaService();
-        private readonly Cancha? _cancha;  // null = alta, != null = edición
+        private readonly Cancha? _cancha;  // null = alta, con valor = edición
 
-        public FrmCanchaEdicion()  // Alta
+        public FrmCanchaEdicion()
         {
             InitializeComponent();
+            Load += FrmCanchaEdicion_Load;
         }
 
-        public FrmCanchaEdicion(Cancha cancha) : this()  // Edición
+        public FrmCanchaEdicion(Cancha cancha) : this()
         {
-            _cancha = cancha;     // 👈 clave: guardamos la seleccionada
+            _cancha = cancha;
+        }
+
+        // Busca el Dashboard de forma robusta
+        private EmpleadoDashboardForm? GetDashboard()
+        {
+            Control? c = this.Parent;
+            while (c != null && c is not EmpleadoDashboardForm) c = c.Parent;
+            return c as EmpleadoDashboardForm
+                   ?? this.FindForm() as EmpleadoDashboardForm
+                   ?? Application.OpenForms["EmpleadoDashboardForm"] as EmpleadoDashboardForm;
         }
 
         private void FrmCanchaEdicion_Load(object? sender, EventArgs e)
         {
-            // Estado
+            // Enter/Esc
+            this.AcceptButton = btnGuardar;
+            this.CancelButton = btnCancelar;
+
+            // Estado (enum)
             cboEstado.DataSource = Enum.GetValues(typeof(EstadoCancha));
 
-            // Número
-            nudNro.Minimum = 1;
-
-            // Tipo (5 o 7)
+            // Tipo 5/7
             cboTipoCancha.Items.Clear();
             cboTipoCancha.Items.Add(5);
             cboTipoCancha.Items.Add(7);
 
-            // Precio
+            // Nro y Precio
+            nudNro.Minimum = 1;
+            nudNro.Maximum = 10000;
             nudPrecio.DecimalPlaces = 2;
             nudPrecio.Minimum = 0;
-            nudPrecio.Maximum = 10000;
+            nudPrecio.Maximum = 100000;
 
-            if (_cancha != null)
+            if (_cancha == null)
             {
-                // --- MODO EDICIÓN ---
-                nudNro.Value = _cancha.NroCancha;
-                cboEstado.SelectedItem = _cancha.EstadoCancha;
-                cboTipoCancha.SelectedItem = _cancha.TipoCancha;
-                nudPrecio.Value = _cancha.PrecioPorHora;
-                Text = $"Editar cancha #{_cancha.NroCancha}";
+                // Alta
+                cboTipoCancha.SelectedIndex = 0;
+                Text = "Alta de cancha";
+                nudNro.ReadOnly = false; // editable en alta
             }
             else
             {
-                // --- MODO ALTA ---
-                cboTipoCancha.SelectedIndex = 0;
-                Text = "Alta de cancha";
+                // Edición: precargar datos
+                nudNro.Value = _cancha.NroCancha;
+
+                // Seleccionar enum de forma segura
+                if (Enum.IsDefined(typeof(EstadoCancha), _cancha.EstadoCancha))
+                    cboEstado.SelectedItem = _cancha.EstadoCancha;
+
+                // Seleccionar tipo (5/7) de forma segura
+                int idx = cboTipoCancha.Items.IndexOf(_cancha.TipoCancha);
+                if (idx >= 0) cboTipoCancha.SelectedIndex = idx;
+
+                nudPrecio.Value = _cancha.PrecioPorHora;
+
+                Text = $"Editar cancha #{_cancha.NroCancha}";
+
+                // Opcional: evitar cambiar el número en edición
+                nudNro.ReadOnly = true;     // quita teclado
+                nudNro.Enabled = false;    // grisado total
             }
+
+            // Asegurar eventos si no están conectados en el Designer
+            btnGuardar.Click -= btnGuardar_Click;
+            btnGuardar.Click += btnGuardar_Click;
+            btnCancelar.Click -= btnCancelar_Click;
+            btnCancelar.Click += btnCancelar_Click;
         }
 
         private void btnGuardar_Click(object? sender, EventArgs e)
@@ -66,29 +99,27 @@ namespace FootballGo.UI
 
                 if (_cancha == null)
                 {
-                    _service.Crear(nro, estado, tipo, precio);              // alta
-                    MessageBox.Show("Cancha creada correctamente.", "OK");
+                    // Alta
+                    _service.Crear(nro, estado, tipo, precio);
                 }
                 else
                 {
-                    _service.Actualizar(_cancha.IdCancha, nro, estado, tipo, precio); // edición
-                    MessageBox.Show("Cancha actualizada correctamente.", "OK");
+                    // Edición
+                    _service.Actualizar(_cancha.IdCancha, nro, estado, tipo, precio);
                 }
 
-                DialogResult = DialogResult.OK;
-                Close();
+                // Volver al listado dentro del dashboard
+                GetDashboard()?.CargarEnPanel(new FrmCanchas());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnCancelar_Click(object? sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            GetDashboard()?.CargarEnPanel(new FrmCanchas());
         }
     }
 }
