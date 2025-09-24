@@ -22,7 +22,7 @@ namespace FootballGo.UI
 
         private void EmpleadoDashboardForm_Load(object? sender, System.EventArgs e)
         {
-            lblSesion.Text = $"Bienvenido! Usuario : {_empleado.Nombre} {_empleado.Apellido}";
+            //lblSesion.Text = $"Bienvenido! Usuario : {_empleado.Nombre} {_empleado.Apellido}";
         }
 
         // 👉 PÚBLICO: otros forms lo llaman para navegar dentro del panel
