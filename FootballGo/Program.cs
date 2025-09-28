@@ -131,4 +131,104 @@ static void Apply(Domain.Model.Cliente e, DTOs.Cliente d)
     e.SetContrasenia(d.Contrasenia);
 }
 
+var empleados = app.MapGroup("/empleados");
+
+// GET /empleados -> lista
+empleados.MapGet("/", async (FootballGoDbContext db) =>
+{
+    var list = await db.Empleados.AsNoTracking().ToListAsync();
+    return Results.Ok(list.Select(ToDtoEmpleado));
+});
+
+// GET /empleados/{id}
+empleados.MapGet("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Empleados.FindAsync(id);
+    return e is null ? Results.NotFound() : Results.Ok(ToDtoEmpleado(e));
+});
+
+// GET /empleados/criteria?texto=...
+empleados.MapGet("/criteria", async (string texto, FootballGoDbContext db) =>
+{
+    texto = (texto ?? string.Empty).ToLower();
+    var list = await db.Empleados
+        .Where(e =>
+            e.Nombre.ToLower().Contains(texto) ||
+            e.Apellido.ToLower().Contains(texto) ||
+            e.Dni.ToString().Contains(texto))
+        .AsNoTracking()
+        .ToListAsync();
+
+    return Results.Ok(list.Select(ToDtoEmpleado));
+});
+
+// POST /empleados
+empleados.MapPost("/", async (DTOs.Empleado dto, FootballGoDbContext db) =>
+{
+    var e = new Domain.Model.Empleado(
+        0,
+        dto.Nombre,
+        dto.Apellido,
+        dto.Dni,
+        dto.SueldoSemanal,
+        dto.EstaActivo,
+        dto.FechaIngreso,
+        dto.Contrasenia
+    );
+
+    db.Empleados.Add(e);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/empleados/{e.Id}", ToDtoEmpleado(e));
+});
+
+// PUT /empleados
+empleados.MapPut("/", async (DTOs.Empleado dto, FootballGoDbContext db) =>
+{
+    if (dto.IdEmpleado <= 0) return Results.BadRequest("Id inválido.");
+
+    var e = await db.Empleados.FindAsync(dto.IdEmpleado);
+    if (e is null) return Results.NotFound($"No existe empleado Id {dto.IdEmpleado}");
+
+    ApplyEmpleado(e, dto);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+// DELETE /empleados/{id}
+empleados.MapDelete("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Empleados.FindAsync(id);
+    if (e is null) return Results.NotFound();
+    db.Empleados.Remove(e);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+static DTOs.Empleado ToDtoEmpleado(Domain.Model.Empleado e) => new()
+{
+    IdEmpleado = e.Id,
+    Nombre = e.Nombre,
+    Apellido = e.Apellido,
+    Dni = e.Dni,
+    SueldoSemanal = e.SueldoSemanal,
+    EstaActivo = e.EstaActivo,
+    FechaIngreso = e.FechaIngreso,
+    Contrasenia = e.contrasenia,
+};
+
+static void ApplyEmpleado(Domain.Model.Empleado e, DTOs.Empleado d)
+{
+    e.SetNombre(d.Nombre);
+    e.SetApellido(d.Apellido);
+    e.SetDni(d.Dni);
+    e.SetSueldoSemanal(d.SueldoSemanal);
+    e.SetEstaActivo(d.EstaActivo);
+    e.SetFechaIngreso(d.FechaIngreso);
+    e.SetContrasenia(d.Contrasenia);
+
+
+}
+
+
 app.Run();

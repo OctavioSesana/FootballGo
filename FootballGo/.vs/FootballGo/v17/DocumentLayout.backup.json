@@ -3,29 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\clientedashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\empleadodashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\clientedashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\api\\apiempleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:api\\apiempleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\empleadologinform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\data\\footballgodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:data\\footballgodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\empleadologinform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\api\\apicliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:api\\apicliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\dtos\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:dtos\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9C1CEA2A-02EC-4F22-8EC3-D2D691CE9066}|..\\FootballGo.UI\\FootballGo.UI.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo.ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|c:\\users\\octav\\onedrive\\desktop\\footballgo\\footballgo\\domain.model\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA1B0E02-BBB9-47CD-BFA1-25282BE99F7A}|FootballGo.csproj|solutionrelative:domain.model\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,7 +31,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -47,92 +43,79 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClienteDashboardForm.cs",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "RelativeDocumentMoniker": "..\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "RelativeToolTip": "..\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAYwFQAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "EmpleadoLoginForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "RelativeDocumentMoniker": "..\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoLoginForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\FootballGo.UI\\EmpleadoLoginForm.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T15:47:02.103Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ClienteDashboardForm.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "RelativeDocumentMoniker": "..\\FootballGo.UI\\ClienteDashboardForm.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\ClienteDashboardForm.cs [Dise\u00F1o]",
-              "RelativeToolTip": "..\\FootballGo.UI\\ClienteDashboardForm.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T15:46:58.583Z",
+              "WhenOpened": "2025-09-28T22:28:32.046Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FootballGoDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Data\\FootballGoDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\FootballGoDbContext.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Data\\FootballGoDbContext.cs",
-              "RelativeToolTip": "Data\\FootballGoDbContext.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAUwD4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EmpleadoDashboardForm.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoDashboardForm.cs",
+              "RelativeDocumentMoniker": "..\\FootballGo.UI\\EmpleadoDashboardForm.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoDashboardForm.cs",
+              "RelativeToolTip": "..\\FootballGo.UI\\EmpleadoDashboardForm.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAwwGwAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T15:39:01.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-28T15:22:42.442Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T15:06:17.19Z",
+              "WhenOpened": "2025-09-28T22:15:03.388Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ApiCliente.cs",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\API\\ApiCliente.cs",
-              "RelativeDocumentMoniker": "API\\ApiCliente.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\API\\ApiCliente.cs",
-              "RelativeToolTip": "API\\ApiCliente.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABDAAAAAAAAAA==",
+              "Title": "Empleado.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\DTOs\\Empleado.cs",
+              "RelativeDocumentMoniker": "DTOs\\Empleado.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\DTOs\\Empleado.cs",
+              "RelativeToolTip": "DTOs\\Empleado.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T13:59:19.072Z",
+              "WhenOpened": "2025-09-28T22:06:31.117Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginForm.cs",
-              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\LoginForm.cs",
-              "RelativeDocumentMoniker": "..\\FootballGo.UI\\LoginForm.cs",
-              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\LoginForm.cs",
-              "RelativeToolTip": "..\\FootballGo.UI\\LoginForm.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAswGIAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Empleado.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Model\\Empleado.cs",
+              "RelativeDocumentMoniker": "Domain.Model\\Empleado.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\Domain.Model\\Empleado.cs",
+              "RelativeToolTip": "Domain.Model\\Empleado.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T13:57:55.775Z",
+              "WhenOpened": "2025-09-28T21:40:29.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmpleadoLoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "RelativeDocumentMoniker": "..\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "RelativeToolTip": "..\\FootballGo.UI\\EmpleadoLoginForm.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAuwDAAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:29:32.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApiEmpleado.cs",
+              "DocumentMoniker": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\API\\ApiEmpleado.cs",
+              "RelativeDocumentMoniker": "API\\ApiEmpleado.cs",
+              "ToolTip": "C:\\Users\\octav\\OneDrive\\Desktop\\FootballGo\\FootballGo\\API\\ApiEmpleado.cs",
+              "RelativeToolTip": "API\\ApiEmpleado.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T20:42:31.448Z",
               "EditorCaption": ""
             }
           ]

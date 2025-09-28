@@ -38,6 +38,7 @@ namespace FootballGo.UI
             contentPanel.Name = "contentPanel";
             contentPanel.Size = new Size(1000, 626);
             contentPanel.TabIndex = 0;
+            contentPanel.Paint += contentPanel_Paint;
             // 
             // EmpleadoDashboardForm
             // 

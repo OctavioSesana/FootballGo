@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using Domain.Model;
 using Domain.Services;
+using EmpleadoDTO = DTOs.Empleado;
 
 namespace FootballGo.UI
 {
@@ -71,13 +72,30 @@ namespace FootballGo.UI
         // ===== Handlers del menú =====
         private void btnCerrarSesion_Click(object? sender, System.EventArgs e) => _menuForm.CerrarSesion();
 
+        private EmpleadoDTO MapToDto(Domain.Model.Empleado e)
+        {
+            return new EmpleadoDTO
+            {
+                IdEmpleado = e.Id,
+                Nombre = e.Nombre,
+                Apellido = e.Apellido,
+                Dni = e.Dni,
+                Contrasenia = e.contrasenia,
+                SueldoSemanal = e.SueldoSemanal,
+                EstaActivo = e.EstaActivo,
+                FechaIngreso = e.FechaIngreso
+            };
+        }
+
+
         private void btnGestionarPerfil_Click(object? sender, System.EventArgs e)
         {
-            var perfilForm = new EmpleadoDetailsForm(_empleado, _menuForm);
+            // Corregimos el constructor para que coincida con la firma esperada
+            var perfilForm = new EmpleadoDetailsForm(MapToDto(_empleado), _menuForm);
             _menuForm.MostrarEnPanel(perfilForm);
         }
 
-        private void btnBajaCuenta_Click(object? sender, System.EventArgs e)
+        private async void btnBajaCuenta_Click(object? sender, EventArgs e)
         {
             var confirm = MessageBox.Show(
                 "¿Está seguro de que desea eliminar su cuenta de empleado? Esta acción no se puede deshacer.",
@@ -85,19 +103,22 @@ namespace FootballGo.UI
 
             if (confirm != DialogResult.Yes) return;
 
-            var service = new EmpleadoService();
-            if (service.Delete(_empleado.Id))
+            try
             {
+                // Llamamos al back usando la API REST
+                await API.Clients.EmpleadoApiClient.DeleteAsync(_empleado.Id);
+
                 MessageBox.Show("Cuenta eliminada correctamente.", "OK");
                 DialogResult = DialogResult.Abort;
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo eliminar la cuenta.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No se pudo eliminar la cuenta. Detalle: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnArticulosAlta_Click_1(object? sender, System.EventArgs e)
         {
@@ -118,6 +139,11 @@ namespace FootballGo.UI
         private void btnListadoCanchas_Click(object? sender, System.EventArgs e)
         {
             CargarEnPanel(new FrmCanchas());         // listado en el mismo form
+        }
+
+        private void contentPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

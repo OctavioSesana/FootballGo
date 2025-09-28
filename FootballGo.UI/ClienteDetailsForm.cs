@@ -64,7 +64,7 @@ namespace FootballGo.UI
 
                 if (!_esRegistro && _cliente.Id > 0)
                 {
-                    await ClienteApiClient.UpdateAsync(_cliente);   // espera DTO
+                    await ClienteApiClient.UpdateAsync(_cliente);  
                 }
                 else
                 {
@@ -72,8 +72,6 @@ namespace FootballGo.UI
                     if (creado != null) _cliente.Id = creado.Id;
                 }
 
-                // Navegación: si tu Dashboard acepta DTO, pasalo directo.
-                // Si tu Dashboard NECESITA el dominio, mapeá acá (ver helper más abajo).
                 var dashboard = new ClienteDashboardForm(MapToDomain(_cliente), _menuForm);
                 _menuForm.MostrarEnPanel(dashboard);
             }

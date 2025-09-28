@@ -66,8 +66,6 @@ namespace FootballGo.UI
             }
 
             // Edición → mostramos el form dentro del panel
-            var frm = new EmpleadoDetailsForm(seleccionado, _menuForm);
-            _menuForm.MostrarEnPanel(frm);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
