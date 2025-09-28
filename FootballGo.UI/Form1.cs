@@ -76,7 +76,7 @@ namespace FootballGo.UI
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        /* private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgvCliente.SelectedRows.Count > 0)
             {
@@ -94,7 +94,7 @@ namespace FootballGo.UI
                 MessageBox.Show("Seleccione un cliente para editar.",
                     "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
+        } */
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {

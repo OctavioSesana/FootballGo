@@ -11,7 +11,7 @@
         public DateTime FechaAlta { get; private set; }
         public string Contrasenia { get; set; } = string.Empty;
 
-        private Cliente() { } // Para EF
+        protected Cliente() { } // Para EF
 
         public Cliente(int id, string nombre, string apellido, string email, int dni, int telefono, DateTime fechaAlta, string contrasenia)
         {

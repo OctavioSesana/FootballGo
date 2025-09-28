@@ -1,26 +1,43 @@
-﻿using Domain.Services;
-using Domain.Model;
-using System;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using API.Clients;
+using ClienteDTO = DTOs.Cliente;       
+using ClienteDomain = Domain.Model.Cliente; 
 
 namespace FootballGo.UI
 {
     public partial class LoginForm : Form
     {
-        private readonly ClienteService _clienteService;
         private readonly MenuForm _menuForm;
 
-        public Cliente? ClienteLogueado { get; private set; }
+        public ClienteDomain? ClienteLogueado { get; private set; }
 
-        // ahora recibe referencia al MenuForm
         public LoginForm(MenuForm menuForm)
         {
             InitializeComponent();
-            _clienteService = new ClienteService();
             _menuForm = menuForm;
+
+            this.Load += LoginForm_Load;
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void LoginForm_Load(object? sender, EventArgs e)
+        {
+            try
+            {
+                var _ = await ClienteApiClient.GetAllAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No puedo conectar con la API. Revisá que el backend esté ejecutándose y que el BaseAddress coincida.\n\nDetalle: "
+                    + ex.Message,
+                    "Conexión con API",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
             var email = txtEmail.Text.Trim();
             var pass = txtPassword.Text.Trim();
@@ -32,31 +49,66 @@ namespace FootballGo.UI
                 return;
             }
 
-            var cliente = _clienteService.Login(email, pass);
+            var btn = sender as Button;
+            if (btn != null) btn.Enabled = false;
 
-            if (cliente != null)
+            try
             {
-                ClienteLogueado = cliente;
+                ClienteDTO? dto = null;
+                if (dto == null)
+                {
+                    var lista = await ClienteApiClient.GetByCriteriaAsync(email);
+                    dto = lista.FirstOrDefault(c =>
+                        c.Email.Equals(email, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(c.Contrasenia, pass));
+                }
 
-                // Mostrar bienvenida en el MenuForm
-                _menuForm.MostrarBienvenidaUsuario(cliente.Nombre, cliente.Apellido, "Cliente");
+                if (dto != null)
+                {
+                    var domain = MapToDomain(dto);
 
-                // Mostrar dashboard en el panel
-                var dashboard = new ClienteDashboardForm(cliente, _menuForm);
-                _menuForm.MostrarEnPanel(dashboard);
+                    ClienteLogueado = domain;
+
+                    _menuForm.MostrarBienvenidaUsuario(domain.Nombre, domain.Apellido, "Cliente");
+
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                    _menuForm.MostrarEnPanel(dashboard);
+                }
+                else
+                {
+                    MessageBox.Show("Email o contraseña incorrectos", "Error de acceso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Email o contraseña incorrectos", "Error de acceso",
+                MessageBox.Show(ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (btn != null) btn.Enabled = true;
             }
         }
 
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            // Mostrar el formulario de registro dentro del mismo panel
             var registroForm = new ClienteDetailsForm(_menuForm, esRegistro: true);
             _menuForm.MostrarEnPanel(registroForm);
+        }
+
+        private static ClienteDomain MapToDomain(ClienteDTO d)
+        {
+            return new ClienteDomain(
+                d.Id,
+                d.Nombre ?? "",
+                d.Apellido ?? "",
+                d.Email ?? "",
+                d.dni,
+                d.telefono,
+                d.FechaAlta == default ? DateTime.Now : d.FechaAlta,
+                d.Contrasenia ?? ""
+            );
         }
     }
 }

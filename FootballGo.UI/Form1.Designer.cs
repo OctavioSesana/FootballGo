@@ -62,7 +62,7 @@
             btnEdit.TabIndex = 3;
             btnEdit.Text = "Editar";
             btnEdit.UseVisualStyleBackColor = true;
-            btnEdit.Click += btnEdit_Click;
+            //btnEdit.Click += btnEdit_Click;
             // 
             // btnAgregar
             // 

@@ -1,4 +1,7 @@
-﻿using Domain.Model;
+﻿using API.Clients;
+using Domain.Model;
+using ClienteDTO = DTOs.Cliente;
+using DomainCliente = Domain.Model.Cliente;
 using Domain.Services;
 using System;
 using System.Windows.Forms;
@@ -7,41 +10,31 @@ namespace FootballGo.UI
 {
     public partial class ClienteDetailsForm : Form
     {
-        private Cliente _cliente;
+        private ClienteDTO _cliente;
         private readonly MenuForm _menuForm;
-        private readonly bool _esRegistro; // true si es registro, false si es edición
+        private readonly bool _esRegistro; 
 
-        // Constructor para agregar un nuevo cliente
-        public ClienteDetailsForm(MenuForm menuForm, bool esRegistro = true, Cliente? cliente = null)
+        public ClienteDetailsForm(MenuForm menuForm, bool esRegistro = true, ClienteDTO? cliente = null)
         {
             InitializeComponent();
             _menuForm = menuForm;
             _esRegistro = esRegistro;
-            _cliente = cliente;
+            _cliente = cliente ?? new ClienteDTO();
 
-            if (_esRegistro)
-            {
-                Text = "Registrar Cliente";
-            }
-            else
-            {
-                Text = "Editar Perfil";
-                if (_cliente != null)
-                    CargarDatosEnFormulario(_cliente);
-            }
+            Text = _esRegistro ? "Registrar Cliente" : "Editar Perfil";
+            if (!_esRegistro) CargarDatosEnFormulario(_cliente);
         }
 
-        // Constructor para editar un cliente existente
-        public ClienteDetailsForm(Cliente clienteAEditar, MenuForm menuForm)
+        public ClienteDetailsForm(ClienteDTO clienteAEditar, MenuForm menuForm)
         {
             InitializeComponent();
-            this.Text = "Editar Cliente";
+            Text = "Editar Cliente";
             _menuForm = menuForm;
-            _cliente = clienteAEditar;
-            CargarDatosEnFormulario(clienteAEditar);
+            _cliente = clienteAEditar ?? new ClienteDTO();
+            CargarDatosEnFormulario(_cliente);
         }
 
-        private void CargarDatosEnFormulario(Cliente cliente)
+        private void CargarDatosEnFormulario(ClienteDTO cliente)
         {
             txtNombre.Text = cliente.Nombre;
             txtApellido.Text = cliente.Apellido;
@@ -49,71 +42,146 @@ namespace FootballGo.UI
             txtContrasenia.Text = cliente.Contrasenia;
             txtDNI.Text = cliente.dni.ToString();
             txtTel.Text = cliente.telefono.ToString();
-            dtpFechaAlta.Value = cliente.FechaAlta;
+            dtpFechaAlta.Value = cliente.FechaAlta == default ? DateTime.Now : cliente.FechaAlta;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private async void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!ValidateCliente()) return;
+
+            var btn = sender as Button;
+            if (btn != null) btn.Enabled = false;
+
             try
             {
-                if (string.IsNullOrWhiteSpace(txtContrasenia.Text))
+                _cliente.Nombre = txtNombre.Text.Trim();
+                _cliente.Apellido = txtApellido.Text.Trim();
+                _cliente.Email = txtEmail.Text.Trim();
+                _cliente.dni = int.Parse(txtDNI.Text);
+                _cliente.telefono = int.Parse(txtTel.Text);
+                _cliente.FechaAlta = dtpFechaAlta.Value;
+                _cliente.Contrasenia = txtContrasenia.Text.Trim();
+
+                if (!_esRegistro && _cliente.Id > 0)
                 {
-                    MessageBox.Show("Debe ingresar una contraseña.", "Validación",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    await ClienteApiClient.UpdateAsync(_cliente);   // espera DTO
                 }
-
-                if (txtContrasenia.Text.Length < 6)
-                {
-                    MessageBox.Show("La contraseña debe tener al menos 6 caracteres.", "Validación",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                _cliente.SetNombre(txtNombre.Text);
-                _cliente.SetApellido(txtApellido.Text);
-                _cliente.SetEmail(txtEmail.Text);
-                _cliente.SetDNI(int.Parse(txtDNI.Text));
-                _cliente.SetTelefono(int.Parse(txtTel.Text));
-                _cliente.SetFechaAlta(dtpFechaAlta.Value);
-                _cliente.SetContrasenia(txtContrasenia.Text.Trim()); // 👈 ESTA LÍNEA ES CLAVE
-
-                var service = new ClienteService();
-
-                if (_cliente.Id == 0)
-                    service.Add(_cliente);
                 else
-                    service.Update(_cliente);
+                {
+                    var creado = await ClienteApiClient.AddAsync(_cliente);
+                    if (creado != null) _cliente.Id = creado.Id;
+                }
 
-                MessageBox.Show("Cliente guardado con éxito", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                var dashboard = new ClienteDashboardForm(_cliente, _menuForm);
+                // Navegación: si tu Dashboard acepta DTO, pasalo directo.
+                // Si tu Dashboard NECESITA el dominio, mapeá acá (ver helper más abajo).
+                var dashboard = new ClienteDashboardForm(MapToDomain(_cliente), _menuForm);
                 _menuForm.MostrarEnPanel(dashboard);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                if (btn != null) btn.Enabled = true;
+            }
+        }
+        private Domain.Model.Cliente MapToDomain(ClienteDTO d)
+        {
+            var contrasenia = string.IsNullOrWhiteSpace(d.Contrasenia) ? "" : d.Contrasenia;
+
+            var c = new Domain.Model.Cliente(
+                d.Id,
+                d.Nombre,
+                d.Apellido,
+                d.Email,
+                d.dni,
+                d.telefono,
+                d.FechaAlta,
+                contrasenia              
+            );
+
+            return c;
         }
 
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private async void btnCancelar_Click(object sender, EventArgs e)
         {
             if (_esRegistro)
             {
-                // Si era registro, volvemos al login
                 _menuForm.MostrarEnPanel(new LoginForm(_menuForm));
+                return;
             }
-            else
+
+            try
             {
-                // Si era edición, volvemos al dashboard del cliente
-                if (_cliente != null)
+                if (_cliente != null && _cliente.Id > 0)
                 {
-                    var dashboard = new ClienteDashboardForm(_cliente, _menuForm);
+                    var dto = await ClienteApiClient.GetAsync(_cliente.Id);
+                    var domain = MapToDomain(dto);
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                    _menuForm.MostrarEnPanel(dashboard);
+                }
+                else
+                {
+                    var domain = MapToDomain(_cliente ?? new ClienteDTO());
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
                     _menuForm.MostrarEnPanel(dashboard);
                 }
             }
+            catch (Exception)
+            {
+                var domain = MapToDomain(_cliente ?? new ClienteDTO());
+                var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                _menuForm.MostrarEnPanel(dashboard);
+            }
+        }
+
+        private bool ValidateCliente()
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("Ingrese el nombre.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNombre.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+            {
+                MessageBox.Show("Ingrese el apellido.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtApellido.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("Ingrese el email.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return false;
+            }
+            if (!int.TryParse(txtDNI.Text, out _))
+            {
+                MessageBox.Show("DNI inválido.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDNI.Focus();
+                return false;
+            }
+            if (!int.TryParse(txtTel.Text, out _))
+            {
+                MessageBox.Show("Teléfono inválido.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTel.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtContrasenia.Text) || txtContrasenia.Text.Length < 6)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtContrasenia.Focus();
+                return false;
+            }
+            return true;
         }
     }
 }

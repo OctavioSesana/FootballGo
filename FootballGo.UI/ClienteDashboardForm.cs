@@ -1,7 +1,9 @@
-﻿using Domain.Model;
+﻿using API.Clients;
+using Domain.Model;
 using Domain.Services;
 using System;
 using System.Windows.Forms;
+using ClienteDTO = DTOs.Cliente;
 
 namespace FootballGo.UI
 {
@@ -30,8 +32,18 @@ namespace FootballGo.UI
 
         private void btnGestionarPerfil_Click(object sender, EventArgs e)
         {
-            // en vez de ShowDialog(), cargamos el form en el panel principal
-            var perfilForm = new ClienteDetailsForm(_cliente, _menuForm);
+            var dto = new ClienteDTO
+            {
+                Id = _cliente.Id,
+                Nombre = _cliente.Nombre,
+                Apellido = _cliente.Apellido,
+                Email = _cliente.Email,
+                dni = _cliente.dni,
+                telefono = _cliente.telefono,
+                FechaAlta = _cliente.FechaAlta,
+                Contrasenia = _cliente.Contrasenia
+            };
+            var perfilForm = new ClienteDetailsForm(menuForm: _menuForm, esRegistro: false, cliente: dto);
             _menuForm.MostrarEnPanel(perfilForm);
         }
 
@@ -42,7 +54,7 @@ namespace FootballGo.UI
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
             var confirm = MessageBox.Show(
                 "¿Está seguro de que desea eliminar su cuenta? Esta acción no se puede deshacer.",
@@ -52,21 +64,22 @@ namespace FootballGo.UI
 
             if (confirm == DialogResult.Yes)
             {
-                var service = new ClienteService();
-                bool eliminado = service.Delete(_cliente.Id);
-
-                if (eliminado)
+                try
                 {
+                    await ClienteApiClient.DeleteAsync(_cliente.Id);
+
                     MessageBox.Show("Su cuenta ha sido eliminada correctamente.", "Cuenta eliminada",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Volvemos al inicio tras borrar la cuenta
-                    _menuForm.MostrarBienvenida();
+                    _menuForm.MostrarEnPanel(new LoginForm(_menuForm));
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo eliminar la cuenta. Intente nuevamente.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se pudo eliminar la cuenta. Detalle: " + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
         }
