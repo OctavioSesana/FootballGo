@@ -7,7 +7,7 @@ namespace FootballGo.UI
     {
         private System.ComponentModel.IContainer components = null;
         private MenuStrip menuStrip;
-        private Panel contentPanel;   // 👈 campo requerido
+        private Panel contentPanel;
 
         protected override void Dispose(bool disposing)
         {

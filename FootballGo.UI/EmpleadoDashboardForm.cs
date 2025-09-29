@@ -60,7 +60,7 @@ namespace FootballGo.UI
             var mGestion = new ToolStripMenuItem("Gestión");
             var itAltaCanchas = new ToolStripMenuItem("Alta de Canchas", null, btnAlta_Click_1);
             var itListado = new ToolStripMenuItem("Listado de Canchas", null, btnListadoCanchas_Click);
-            var itAltaArt = new ToolStripMenuItem("Alta de Artículos", null, btnArticulosAlta_Click_1);
+            var itAltaArt = new ToolStripMenuItem("Listado de clientes", null, btnArticulosAlta_Click_1);
             var itReservas = new ToolStripMenuItem("Gestión de Reservas", null, btnGestion_Click);
             mGestion.DropDownItems.AddRange(new[] { itAltaCanchas, itListado, itAltaArt, itReservas });
 
@@ -118,7 +118,7 @@ namespace FootballGo.UI
 
         private void btnArticulosAlta_Click_1(object? sender, System.EventArgs e)
         {
-            MessageBox.Show("Funcionalidad de alta de artículos no implementada.", "Info");
+            MessageBox.Show("Funcionalidad de listado de clientes no implementada.", "Info");
         }
 
         private void btnGestion_Click(object? sender, System.EventArgs e)

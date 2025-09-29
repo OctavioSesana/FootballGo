@@ -3,92 +3,63 @@
     partial class ClienteDashboardForm
     {
         private System.ComponentModel.IContainer components = null;
+        private MenuStrip menuStrip;
+        private Panel contentPanel;
         private Label lblSesion;
-        private Button btnCerrarSesion;
-        private Button btnGestionarPerfil;
-        private Button btnReservarCancha;
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
+            {
                 components.Dispose();
+            }
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            lblSesion = new Label();
-            btnCerrarSesion = new Button();
-            btnGestionarPerfil = new Button();
-            btnReservarCancha = new Button();
-            btnDelete = new Button();
-            SuspendLayout();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.contentPanel = new System.Windows.Forms.Panel();
+            this.lblSesion = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // contentPanel
+            // 
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 28);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(800, 422);
+            this.contentPanel.TabIndex = 1;
             // 
             // lblSesion
             // 
-            lblSesion.AutoSize = true;
-            lblSesion.Location = new Point(30, 20);
-            lblSesion.Name = "lblSesion";
-            lblSesion.Size = new Size(194, 20);
-            lblSesion.TabIndex = 0;
-            lblSesion.Text = "Sesión iniciada como: (user)";
-            // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.Location = new Point(30, 60);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(120, 30);
-            btnCerrarSesion.TabIndex = 1;
-            btnCerrarSesion.Text = "Cerrar sesión";
-            btnCerrarSesion.UseVisualStyleBackColor = true;
-            btnCerrarSesion.Click += btnCerrarSesion_Click;
-            // 
-            // btnGestionarPerfil
-            // 
-            btnGestionarPerfil.Location = new Point(30, 110);
-            btnGestionarPerfil.Name = "btnGestionarPerfil";
-            btnGestionarPerfil.Size = new Size(150, 30);
-            btnGestionarPerfil.TabIndex = 2;
-            btnGestionarPerfil.Text = "Gestionar perfil";
-            btnGestionarPerfil.UseVisualStyleBackColor = true;
-            btnGestionarPerfil.Click += btnGestionarPerfil_Click;
-            // 
-            // btnReservarCancha
-            // 
-            btnReservarCancha.Location = new Point(30, 160);
-            btnReservarCancha.Name = "btnReservarCancha";
-            btnReservarCancha.Size = new Size(150, 30);
-            btnReservarCancha.TabIndex = 3;
-            btnReservarCancha.Text = "Reservar cancha";
-            btnReservarCancha.UseVisualStyleBackColor = true;
-            btnReservarCancha.Click += btnReservarCancha_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(30, 207);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(150, 29);
-            btnDelete.TabIndex = 4;
-            btnDelete.Text = "Eliminar cuenta";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            this.lblSesion.AutoSize = true;
+            this.lblSesion.Location = new System.Drawing.Point(12, 40);
+            this.lblSesion.Name = "lblSesion";
+            this.lblSesion.Size = new System.Drawing.Size(160, 20);
+            this.lblSesion.TabIndex = 2;
             // 
             // ClienteDashboardForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(400, 288);
-            Controls.Add(btnDelete);
-            Controls.Add(btnReservarCancha);
-            Controls.Add(btnGestionarPerfil);
-            Controls.Add(btnCerrarSesion);
-            Controls.Add(lblSesion);
-            Name = "ClienteDashboardForm";
-            Text = "Panel de Usuario";
-            Load += ClienteDashboardForm_Load;
-            ResumeLayout(false);
-            PerformLayout();
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblSesion);
+            this.Controls.Add(this.contentPanel);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
+            this.Name = "ClienteDashboardForm";
+            this.Text = "Dashboard Cliente";
+            this.Load += new System.EventHandler(this.ClienteDashboardForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
-        private Button btnDelete;
     }
 }
