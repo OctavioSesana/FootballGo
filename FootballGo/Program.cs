@@ -230,5 +230,96 @@ static void ApplyEmpleado(Domain.Model.Empleado e, DTOs.Empleado d)
 
 }
 
+// ===================== CANCHAS =====================
+var canchas = app.MapGroup("/canchas");
+
+// GET /api/canchas  -> lista
+canchas.MapGet("", async (FootballGoDbContext db) =>
+{
+    var list = await db.Canchas.AsNoTracking().ToListAsync();
+    return Results.Ok(list.Select(ToDtoCancha));
+});
+
+// GET /api/canchas/{id}
+canchas.MapGet("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Canchas.FindAsync(id);
+    return e is null ? Results.NotFound() : Results.Ok(ToDtoCancha(e));
+});
+
+// GET /api/canchas/nro/{nro}
+canchas.MapGet("/nro/{nro:int}", async (int nro, FootballGoDbContext db) =>
+{
+    var e = await db.Canchas.AsNoTracking().FirstOrDefaultAsync(x => x.NroCancha == nro);
+    return e is null ? Results.NotFound() : Results.Ok(ToDtoCancha(e));
+});
+
+// POST /api/canchas
+canchas.MapPost("", async (DTOs.Cancha dto, FootballGoDbContext db) =>
+{
+    if (dto.NroCancha <= 0) return Results.BadRequest("Número de cancha inválido.");
+    if (dto.TipoCancha != 5 && dto.TipoCancha != 7) return Results.BadRequest("El tipo de cancha debe ser 5 o 7.");
+    if (dto.PrecioPorHora <= 0) return Results.BadRequest("Precio por hora inválido.");
+
+    var existeNro = await db.Canchas.AnyAsync(c => c.NroCancha == dto.NroCancha);
+    if (existeNro) return Results.Conflict("Ya existe una cancha con ese número.");
+
+    var e = new Domain.Model.Cancha
+    {
+        IdCancha = dto.Id,
+        NroCancha = dto.NroCancha,
+        EstadoCancha = dto.Estado,
+        TipoCancha = dto.TipoCancha,
+        PrecioPorHora = dto.PrecioPorHora
+    };
+
+    db.Canchas.Add(e);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/api/canchas/{e.IdCancha}", ToDtoCancha(e));
+});
+
+// PUT /api/canchas
+canchas.MapPut("", async (DTOs.Cancha dto, FootballGoDbContext db) =>
+{
+    if (dto.Id <= 0) return Results.BadRequest("Id inválido.");
+
+    var e = await db.Canchas.FindAsync(dto.Id);
+    if (e is null) return Results.NotFound($"No existe cancha Id {dto.Id}");
+
+    var otraConEseNro = await db.Canchas
+        .AsNoTracking()
+        .FirstOrDefaultAsync(c => c.NroCancha == dto.NroCancha && c.IdCancha != dto.Id);
+    if (otraConEseNro != null) return Results.Conflict("Ya existe otra cancha con ese número.");
+
+    e.IdCancha = dto.Id;
+    e.NroCancha = dto.NroCancha;
+    e.EstadoCancha = dto.Estado;
+    e.TipoCancha = dto.TipoCancha;
+    e.PrecioPorHora = dto.PrecioPorHora;
+
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+// DELETE /api/canchas/{id}
+canchas.MapDelete("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Canchas.FindAsync(id);
+    if (e is null) return Results.NotFound();
+    db.Canchas.Remove(e);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+static DTOs.Cancha ToDtoCancha(Domain.Model.Cancha c) => new()
+{
+    Id = c.IdCancha,
+    NroCancha = c.NroCancha,
+    Estado = c.EstadoCancha,
+    TipoCancha = c.TipoCancha,
+    PrecioPorHora = c.PrecioPorHora
+};
+
 
 app.Run();

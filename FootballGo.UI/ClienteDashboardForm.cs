@@ -10,7 +10,8 @@ namespace FootballGo.UI
     public partial class ClienteDashboardForm : Form
     {
         private Cliente _cliente;
-        private readonly MenuForm _menuForm; // referencia al contenedor principal
+        private readonly MenuForm _menuForm;
+        private Form? _child;
 
         public ClienteDashboardForm(Cliente cliente, MenuForm menuForm)
         {

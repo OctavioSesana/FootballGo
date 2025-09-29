@@ -10,7 +10,7 @@ namespace FootballGo.UI
         private readonly Empleado _empleado;
         private readonly MenuForm _menuForm;
 
-        private Form? _child; // form embebido actual
+        private Form? _child; 
 
         public EmpleadoDashboardForm(Empleado empleado, MenuForm menuForm)
         {
@@ -18,7 +18,7 @@ namespace FootballGo.UI
             _empleado = empleado;
             _menuForm = menuForm;
 
-            CrearMenu(); // armamos los ítems del menú en tiempo de ejecución
+            CrearMenu();
         }
 
         private void EmpleadoDashboardForm_Load(object? sender, System.EventArgs e)
@@ -26,7 +26,6 @@ namespace FootballGo.UI
             //lblSesion.Text = $"Bienvenido! Usuario : {_empleado.Nombre} {_empleado.Apellido}";
         }
 
-        // 👉 PÚBLICO: otros forms lo llaman para navegar dentro del panel
         public void CargarEnPanel(Form child)
         {
             if (_child != null)
@@ -69,7 +68,6 @@ namespace FootballGo.UI
             menuStrip.Items.Add(mGestion);
         }
 
-        // ===== Handlers del menú =====
         private void btnCerrarSesion_Click(object? sender, System.EventArgs e) => _menuForm.CerrarSesion();
 
         private EmpleadoDTO MapToDto(Domain.Model.Empleado e)
@@ -90,7 +88,6 @@ namespace FootballGo.UI
 
         private void btnGestionarPerfil_Click(object? sender, System.EventArgs e)
         {
-            // Corregimos el constructor para que coincida con la firma esperada
             var perfilForm = new EmpleadoDetailsForm(MapToDto(_empleado), _menuForm);
             _menuForm.MostrarEnPanel(perfilForm);
         }
@@ -105,7 +102,6 @@ namespace FootballGo.UI
 
             try
             {
-                // Llamamos al back usando la API REST
                 await API.Clients.EmpleadoApiClient.DeleteAsync(_empleado.Id);
 
                 MessageBox.Show("Cuenta eliminada correctamente.", "OK");
@@ -130,15 +126,22 @@ namespace FootballGo.UI
             MessageBox.Show("Funcionalidad de gestión de reservas no implementada.", "Info");
         }
 
-        // ------- Navegación embebida -------
         private void btnAlta_Click_1(object? sender, System.EventArgs e)
         {
-            CargarEnPanel(new FrmCanchaEdicion());   // alta en el mismo form
+            CargarEnPanel(new FrmCanchaEdicion());
         }
 
-        private void btnListadoCanchas_Click(object? sender, System.EventArgs e)
+        private async void btnListadoCanchas_Click(object? sender, EventArgs e)
         {
-            CargarEnPanel(new FrmCanchas());         // listado en el mismo form
+            try
+            {
+                var canchas = await API.Clients.CanchaApiClient.GetAllAsync();
+                CargarEnPanel(new FrmCanchas());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar canchas: {ex.Message}");
+            }
         }
 
         private void contentPanel_Paint(object sender, PaintEventArgs e)
