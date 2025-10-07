@@ -32,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("/", () => "API FootballGo funcionando 🚀");
+
 var clientes = app.MapGroup("/clientes");
 
 // GET /clientes  -> lista

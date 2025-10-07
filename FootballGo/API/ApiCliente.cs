@@ -1,8 +1,6 @@
 ﻿using DTOs; // contiene DTOs.Cliente
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-
-// Alias para seguir llamándolo "ClienteDTO" en este archivo
 using ClienteDTO = DTOs.Cliente;
 
 namespace API.Clients
