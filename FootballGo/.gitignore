@@ -1,7 +1,20 @@
-# Archivos de Visual Studio
+# Archivos y carpetas de Visual Studio
 .vs/
-*.dtbcache.v2
-*.fudtcache.v2
+bin/
+obj/
+*.user
 *.suo
-DocumentLayout.backup.json
-DocumentLayout.json
+*.cache
+*.db
+*.pdb
+*.dll
+*.FileListAbsolute.txt
+*.nuget.dgspec.json
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# Archivos temporales de compilación
+*.log
+*.tmp
+
+# Configuración local
+appsettings.Development.json

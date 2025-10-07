@@ -1,4 +1,4 @@
-﻿using DTOs; // contiene DTOs.Cliente
+﻿using DTOs;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using ClienteDTO = DTOs.Cliente;
