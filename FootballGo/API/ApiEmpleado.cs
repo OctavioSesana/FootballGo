@@ -1,8 +1,6 @@
-﻿using DTOs; // contiene DTOs.Empleado
+﻿using DTOs;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-
-// Alias para seguir llamándolo "EmpleadoDTO" en este archivo
 using EmpleadoDTO = DTOs.Empleado;
 
 namespace API.Clients

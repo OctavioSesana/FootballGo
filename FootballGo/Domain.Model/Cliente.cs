@@ -11,7 +11,7 @@
         public DateTime FechaAlta { get; private set; }
         public string Contrasenia { get; set; } = string.Empty;
 
-        protected Cliente() { } // Para EF
+        protected Cliente() { }
 
         public Cliente(int id, string nombre, string apellido, string email, int dni, int telefono, DateTime fechaAlta, string contrasenia)
         {
@@ -32,15 +32,8 @@
         public void SetDNI(int dni) => this.dni = dni;
         public void SetTelefono(int telefono) => this.telefono = telefono;
         public void SetFechaAlta(DateTime fechaAlta) => FechaAlta = fechaAlta;
-        //public void SetContrasenia(string contrasenia) => Contrasenia = contrasenia;
         public void SetContrasenia(string contrasenia)
         {
-            /* if (string.IsNullOrWhiteSpace(contrasenia))
-                throw new ArgumentException("La contraseña no puede estar vacía.", nameof(contrasenia)); */
-
-            /* if (contrasenia.Length < 6)
-                throw new ArgumentException("La contraseña debe tener al menos 6 caracteres.", nameof(contrasenia)); */
-
             Contrasenia = contrasenia;
         }
     }

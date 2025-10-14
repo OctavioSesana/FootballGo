@@ -1,9 +1,6 @@
 using Domain.Model;
 using Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+using ClienteDTO = DTOs.Cliente;
 
 namespace FootballGo.UI
 {
@@ -12,11 +9,14 @@ namespace FootballGo.UI
         private readonly ClienteService _clienteService;
         private readonly MenuForm _menuForm;
 
-        public Form1(ClienteService clienteService, MenuForm menuForm)
+        public Form1(IEnumerable<ClienteDTO> clientes, MenuForm menuForm)
         {
             InitializeComponent();
-            _clienteService = clienteService;
             _menuForm = menuForm;
+            _clienteService = _clienteService ?? new ClienteService();
+            dgvCliente.DataSource = clientes.ToList();
+            dgvCliente.ReadOnly = true;
+            dgvCliente.AllowUserToAddRows = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,29 +76,39 @@ namespace FootballGo.UI
             }
         }
 
-        /* private void btnEdit_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvCliente.SelectedRows.Count > 0)
+            if (dgvCliente.SelectedRows.Count == 0)
             {
-                Cliente? clienteSeleccionado = dgvCliente.SelectedRows[0].DataBoundItem as Cliente;
+                MessageBox.Show("Seleccione un cliente para editar.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                if (clienteSeleccionado != null)
+            var clienteSeleccionado = (Domain.Model.Cliente)dgvCliente.SelectedRows[0].DataBoundItem;
+
+            var formEditar = new ClienteDetailsForm(clienteSeleccionado, _menuForm);
+            DialogResult resultado = formEditar.ShowDialog();
+
+            if (resultado == DialogResult.OK && formEditar.ClienteResult != null)
+            {
+                bool actualizado = _clienteService.Update((Cliente)formEditar.ClienteResult);
+
+                if (actualizado)
                 {
-                    // en vez de abrir una ventana modal, mostramos el ClienteDetailsForm en el panel
-                    var clienteDetailsForm = new ClienteDetailsForm(clienteSeleccionado, _menuForm);
-                    _menuForm.MostrarEnPanel(clienteDetailsForm);
+                    MessageBox.Show("Cliente actualizado correctamente.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarClientes();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar el cliente.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("Seleccione un cliente para editar.",
-                    "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        } */
-
+        }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            // en vez de abrir modal, mostramos en el panel
             var clienteDetailsForm = new ClienteDetailsForm(_menuForm);
             _menuForm.MostrarEnPanel(clienteDetailsForm);
         }

@@ -1,6 +1,7 @@
 ﻿using API.Clients;
 using Domain.Model;
 using DTOs;
+using MisCanchasApp;
 using System;
 using System.Windows.Forms;
 using ClienteDTO = DTOs.Cliente;
@@ -98,10 +99,17 @@ namespace FootballGo.UI
             };
         }
 
-        private void btnReservarCancha_Click(object? sender, EventArgs e)
+        private async void btnReservarCancha_Click(object? sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidad de reservar cancha no implementada aún.", "Info",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                var canchas = await API.Clients.CanchaApiClient.GetAllAsync();
+                CargarEnPanel(new ListadoCanchasForm());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar canchas: {ex.Message}");
+            }
         }
 
         private async void btnDelete_Click(object? sender, EventArgs e)

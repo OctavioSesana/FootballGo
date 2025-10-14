@@ -27,16 +27,16 @@ namespace FootballGo.UI
             menuStrip.ImageScalingSize = new Size(20, 20);
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(1000, 24);
+            menuStrip.Size = new Size(1000, 28);
             menuStrip.TabIndex = 2;
             // 
             // contentPanel
             // 
             contentPanel.BackColor = Color.White;
             contentPanel.Dock = DockStyle.Fill;
-            contentPanel.Location = new Point(0, 24);
+            contentPanel.Location = new Point(0, 28);
             contentPanel.Name = "contentPanel";
-            contentPanel.Size = new Size(1000, 626);
+            contentPanel.Size = new Size(1000, 622);
             contentPanel.TabIndex = 0;
             contentPanel.Paint += contentPanel_Paint;
             // 

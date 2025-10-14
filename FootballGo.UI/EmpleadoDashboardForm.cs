@@ -45,6 +45,7 @@ namespace FootballGo.UI
             child.Show();
         }
 
+
         private void CrearMenu()
         {
             menuStrip.Items.Clear();
@@ -60,7 +61,7 @@ namespace FootballGo.UI
             var mGestion = new ToolStripMenuItem("Gestión");
             var itAltaCanchas = new ToolStripMenuItem("Alta de Canchas", null, btnAlta_Click_1);
             var itListado = new ToolStripMenuItem("Listado de Canchas", null, btnListadoCanchas_Click);
-            var itAltaArt = new ToolStripMenuItem("Listado de clientes", null, btnArticulosAlta_Click_1);
+            var itAltaArt = new ToolStripMenuItem("Listado de clientes", null, btnListadoClientes_Click);
             var itReservas = new ToolStripMenuItem("Gestión de Reservas", null, btnGestion_Click);
             mGestion.DropDownItems.AddRange(new[] { itAltaCanchas, itListado, itAltaArt, itReservas });
 
@@ -92,6 +93,20 @@ namespace FootballGo.UI
             _menuForm.MostrarEnPanel(perfilForm);
         }
 
+        private async void btnListadoClientes_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                var clientes = await API.Clients.ClienteApiClient.GetAllAsync();
+                CargarEnPanel(new Form1(clientes, _menuForm));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar clientes: {ex.Message}");
+            }
+        }
+
+
         private async void btnBajaCuenta_Click(object? sender, EventArgs e)
         {
             var confirm = MessageBox.Show(
@@ -113,12 +128,6 @@ namespace FootballGo.UI
                 MessageBox.Show($"No se pudo eliminar la cuenta. Detalle: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-        private void btnArticulosAlta_Click_1(object? sender, System.EventArgs e)
-        {
-            MessageBox.Show("Funcionalidad de listado de clientes no implementada.", "Info");
         }
 
         private void btnGestion_Click(object? sender, System.EventArgs e)

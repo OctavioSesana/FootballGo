@@ -62,7 +62,6 @@ namespace FootballGo.UI
 
         private EmpleadoDashboardForm? GetDashboard() => this.FindForm() as EmpleadoDashboardForm;
 
-        // ---- botones (conectalos en el Designer de este form) ----
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             GetDashboard()?.CargarEnPanel(new FrmCanchaEdicion());

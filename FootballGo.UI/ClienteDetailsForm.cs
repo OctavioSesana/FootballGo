@@ -11,8 +11,10 @@ namespace FootballGo.UI
     public partial class ClienteDetailsForm : Form
     {
         private ClienteDTO _cliente;
+        private DomainCliente clienteSeleccionado;
         private readonly MenuForm _menuForm;
-        private readonly bool _esRegistro; 
+        private readonly bool _esRegistro;
+        public object ClienteResult { get; internal set; }
 
         public ClienteDetailsForm(MenuForm menuForm, bool esRegistro = true, ClienteDTO? cliente = null)
         {
@@ -32,6 +34,17 @@ namespace FootballGo.UI
             _menuForm = menuForm;
             _cliente = clienteAEditar ?? new ClienteDTO();
             CargarDatosEnFormulario(_cliente);
+        }
+
+        public ClienteDetailsForm(DomainCliente clienteSeleccionado, MenuForm menuForm)
+        {
+            this.clienteSeleccionado = clienteSeleccionado;
+            _menuForm = menuForm;
+        }
+
+        public ClienteDetailsForm(DomainCliente clienteSeleccionado)
+        {
+            this.clienteSeleccionado = clienteSeleccionado;
         }
 
         private void CargarDatosEnFormulario(ClienteDTO cliente)

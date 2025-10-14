@@ -39,7 +39,7 @@
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(900, 50);
+            panelTop.Size = new Size(1251, 50);
             panelTop.TabIndex = 1;
             // 
             // btnClientes
@@ -65,10 +65,10 @@
             // lblBienvenida
             // 
             lblBienvenida.AutoSize = true;
-            lblBienvenida.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblBienvenida.Location = new Point(250, 12);
+            lblBienvenida.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblBienvenida.Location = new Point(527, 8);
             lblBienvenida.Name = "lblBienvenida";
-            lblBienvenida.Size = new Size(150, 25);
+            lblBienvenida.Size = new Size(118, 28);
             lblBienvenida.TabIndex = 3;
             lblBienvenida.Text = "Bienvenido";
             lblBienvenida.Visible = false;
@@ -78,12 +78,12 @@
             panelContainer.Dock = DockStyle.Fill;
             panelContainer.Location = new Point(0, 50);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(900, 450);
+            panelContainer.Size = new Size(1251, 558);
             panelContainer.TabIndex = 0;
             // 
             // MenuForm
             // 
-            ClientSize = new Size(900, 500);
+            ClientSize = new Size(1251, 608);
             Controls.Add(panelContainer);
             Controls.Add(panelTop);
             Name = "MenuForm";

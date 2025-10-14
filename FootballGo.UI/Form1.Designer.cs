@@ -30,8 +30,6 @@
         {
             dgvCliente = new DataGridView();
             btnDelete = new Button();
-            btnEdit = new Button();
-            btnAgregar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCliente).BeginInit();
             SuspendLayout();
             // 
@@ -46,7 +44,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(969, 236);
+            btnDelete.Location = new Point(1106, 236);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(94, 29);
             btnDelete.TabIndex = 2;
@@ -54,33 +52,11 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
-            // btnEdit
-            // 
-            btnEdit.Location = new Point(1106, 236);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(94, 29);
-            btnEdit.TabIndex = 3;
-            btnEdit.Text = "Editar";
-            btnEdit.UseVisualStyleBackColor = true;
-            //btnEdit.Click += btnEdit_Click;
-            // 
-            // btnAgregar
-            // 
-            btnAgregar.Location = new Point(814, 236);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(94, 29);
-            btnAgregar.TabIndex = 4;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
-            btnAgregar.Click += btnAgregar_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1212, 450);
-            Controls.Add(btnAgregar);
-            Controls.Add(btnEdit);
             Controls.Add(btnDelete);
             Controls.Add(dgvCliente);
             Name = "Form1";
@@ -94,7 +70,5 @@
 
         private DataGridView dgvCliente;
         private Button btnDelete;
-        private Button btnEdit;
-        private Button btnAgregar;
     }
 }
