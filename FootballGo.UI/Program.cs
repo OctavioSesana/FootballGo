@@ -34,4 +34,10 @@ namespace FootballGo.UI
             Application.Run(provider.GetRequiredService<MenuForm>());
         }
     }
+
+    public static class SesionActual
+    {
+        public static string MailUsuario { get; set; } = string.Empty;
+        public static int IdUsuario { get; set; }
+    }
 }

@@ -85,7 +85,7 @@ namespace FootballGo.UI
                     if (creado != null) _cliente.Id = creado.Id;
                 }
 
-                var dashboard = new ClienteDashboardForm(MapToDomain(_cliente), _menuForm);
+                var dashboard = new ClienteDashboardForm(MapToDomain(_cliente), _menuForm, _cliente.Email);
                 _menuForm.MostrarEnPanel(dashboard);
             }
             catch (Exception ex)
@@ -130,20 +130,20 @@ namespace FootballGo.UI
                 {
                     var dto = await ClienteApiClient.GetAsync(_cliente.Id);
                     var domain = MapToDomain(dto);
-                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm, _cliente.Email);
                     _menuForm.MostrarEnPanel(dashboard);
                 }
                 else
                 {
                     var domain = MapToDomain(_cliente ?? new ClienteDTO());
-                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm, _cliente.Email);
                     _menuForm.MostrarEnPanel(dashboard);
                 }
             }
             catch (Exception)
             {
                 var domain = MapToDomain(_cliente ?? new ClienteDTO());
-                var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                var dashboard = new ClienteDashboardForm(domain, _menuForm, _cliente.Email);
                 _menuForm.MostrarEnPanel(dashboard);
             }
         }

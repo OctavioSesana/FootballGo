@@ -11,8 +11,9 @@ namespace Data
 
         public DbSet<Cliente> Clientes => Set<Cliente>();
         public DbSet<Empleado> Empleados => Set<Empleado>();
-
         public DbSet<Cancha> Canchas => Set<Cancha>();
+        public DbSet<Reserva> Reservas => Set<Reserva>();
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,10 +52,10 @@ namespace Data
 
             var c = modelBuilder.Entity<Cancha>();
             c.ToTable("Canchas");
-            c.HasKey(x => x.IdCancha);
-            c.Property(x => x.IdCancha).ValueGeneratedOnAdd();
+            c.HasKey(x => x.NroCancha);
+            c.Property(x => x.NroCancha).ValueGeneratedOnAdd();
             c.Property(x => x.NroCancha).IsRequired();
-            c.HasIndex(x => x.NroCancha).IsUnique();  // nro único
+            c.HasIndex(x => x.NroCancha).IsUnique();
 
             c.Property(x => x.EstadoCancha)
             .HasConversion<string>()          // almacena "Disponible/Mantenimiento/Ocupada"
@@ -69,6 +70,32 @@ namespace Data
             c.Property(x => x.PrecioPorHora)
              .HasColumnType("decimal(10,2)")   // hasta 99999999.99
              .IsRequired();
+
+            var r = modelBuilder.Entity<Reserva>();
+
+            r.ToTable("Reservas");
+            r.HasKey(x => x.IdReserva);
+            r.Property(x => x.IdReserva)
+             .ValueGeneratedOnAdd();
+            r.Property(x => x.FechaReserva)
+             .HasColumnType("datetime2")
+             .HasDefaultValueSql("GETDATE()")
+             .IsRequired();
+            r.Property(x => x.HoraInicio)
+             .HasColumnType("time")
+             .IsRequired();
+            r.Property(x => x.PrecioTotal)
+             .HasColumnType("decimal(10,2)")
+             .IsRequired();
+            r.Property(x => x.mailUsuario)
+             .HasMaxLength(100)
+             .IsRequired();
+            r.HasOne<Cancha>()
+             .WithMany()
+              .HasPrincipalKey(c => c.NroCancha) // una cancha puede tener muchas reservas
+             .HasForeignKey(x => x.NroCancha)    // FK en Reserva
+             .OnDelete(DeleteBehavior.Restrict); // evita borrar una cancha si tiene reservas
+
 
         }
 

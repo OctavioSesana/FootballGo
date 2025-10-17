@@ -9,7 +9,6 @@ namespace Data
         int Insert(Cancha c);
         void Update(Cancha c);
         List<Cancha> GetAll();
-        Cancha? GetById(int id);
         Cancha? GetByNro(int nro);
         void Delete(int id);
     }
@@ -21,7 +20,7 @@ namespace Data
             using var db = new FootballGoDbContext();
             db.Canchas.Add(c);
             db.SaveChanges();
-            return c.IdCancha;
+            return c.NroCancha;
         }
 
         public void Update(Cancha c)
@@ -39,10 +38,10 @@ namespace Data
                      .ToList();
         }
 
-        public Cancha? GetById(int id)
+        public Cancha? GetById(int nroCancha)
         {
             using var db = new FootballGoDbContext();
-            return db.Canchas.FirstOrDefault(x => x.IdCancha == id);
+            return db.Canchas.FirstOrDefault(x => x.NroCancha == nroCancha);
         }
 
         public Cancha? GetByNro(int nro)
@@ -61,7 +60,7 @@ namespace Data
         public void Delete(int id)
         {
             using var db = new FootballGoDbContext();
-            var cancha = db.Canchas.FirstOrDefault(c => c.IdCancha == id);
+            var cancha = db.Canchas.FirstOrDefault(c => c.NroCancha == id);
             if (cancha == null) return;
 
             db.Canchas.Remove(cancha);

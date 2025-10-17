@@ -5,7 +5,6 @@ namespace DTOs
 {
     public class Cancha
     {
-        public int Id { get; set; }
         public int NroCancha { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))] 

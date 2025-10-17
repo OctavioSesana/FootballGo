@@ -87,7 +87,7 @@ namespace FootballGo.UI
 
             try
             {
-                _service.Eliminar(sel.IdCancha);
+                _service.Eliminar(sel.NroCancha);
                 CargarDatos();
             }
             catch (Exception ex)

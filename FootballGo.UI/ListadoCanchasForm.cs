@@ -8,12 +8,14 @@ namespace MisCanchasApp
     public partial class ListadoCanchasForm : Form
     {
         private readonly CanchaService _service = new CanchaService();
+        private readonly string _mailUsuario;
 
-        public ListadoCanchasForm()
+        public ListadoCanchasForm(string mailUsuario)
         {
             InitializeComponent();
             Load += ListadoCanchasForm_Load;
             dgvCanchas.CellClick += dgvCanchas_CellClick;
+            _mailUsuario = mailUsuario;
         }
 
         private async void ListadoCanchasForm_Load(object sender, EventArgs e)
@@ -101,18 +103,8 @@ namespace MisCanchasApp
             {
                 var canchaSeleccionada = (Cancha)dgvCanchas.Rows[e.RowIndex].DataBoundItem;
 
-                MessageBox.Show(
-                    $"Seleccionaste la cancha N° {canchaSeleccionada.NroCancha}\n" +
-                    $"Tipo: {canchaSeleccionada.TipoCancha}\n" +
-                    $"Precio: {canchaSeleccionada.PrecioPorHora:C2}",
-                    "Reserva de Cancha",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-
-                // Ejemplo: abrir form de reserva
-                // var reservaForm = new ReservaForm(canchaSeleccionada);
-                // reservaForm.ShowDialog();
+                var reservaForm = new ReservaForm(canchaSeleccionada, _mailUsuario);
+                reservaForm.ShowDialog();
             }
         }
     }

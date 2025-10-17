@@ -7,7 +7,7 @@ namespace Domain.Services
 {
     public class CanchaService
     {
-        private readonly ICanchaRepository _repo; // ree
+        private readonly ICanchaRepository _repo;
 
         public CanchaService() : this(new CanchaRepository()) { }
         public CanchaService(ICanchaRepository repo) => _repo = repo;
@@ -32,19 +32,16 @@ namespace Domain.Services
             return _repo.Insert(c);
         }
 
-        public void Actualizar(int id, int nroCancha, EstadoCancha estado, int tipo, decimal precio)
+        public void Actualizar(int nroCancha, EstadoCancha estado, int tipo, decimal precio)
         {
             if (nroCancha <= 0) throw new ArgumentException("El número de cancha debe ser > 0.");
             if (tipo != 5 && tipo != 7) throw new ArgumentException("El tipo de cancha debe ser 5 o 7.");
             if (precio <= 0) throw new ArgumentException("El precio por hora debe ser > 0.");
 
-            var existente = _repo.GetById(id)
+            var existente = _repo.GetByNro(nroCancha)
                 ?? throw new InvalidOperationException("Cancha no encontrada.");
 
-            // 👇 SOLO bloquea si el nro lo usa OTRA cancha (Id distinto)
             var otraConEseNro = _repo.GetByNro(nroCancha);
-            if (otraConEseNro != null && otraConEseNro.IdCancha != id)
-                throw new InvalidOperationException("Ya existe otra cancha con ese número.");
 
             existente.NroCancha = nroCancha;
             existente.EstadoCancha = estado;
@@ -54,12 +51,12 @@ namespace Domain.Services
             _repo.Update(existente);
         }
 
-        public void Eliminar(int id)
+        public void Eliminar(int nroCancha)
         {
-            var existente = _repo.GetById(id)
+            var existente = _repo.GetByNro(nroCancha)
                 ?? throw new InvalidOperationException("La cancha no existe.");
 
-            _repo.Delete(id);
+            _repo.Delete(nroCancha);
         }
 
 

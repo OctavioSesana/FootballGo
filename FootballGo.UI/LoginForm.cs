@@ -71,7 +71,7 @@ namespace FootballGo.UI
 
                     _menuForm.MostrarBienvenidaUsuario(domain.Nombre, domain.Apellido, "Cliente");
 
-                    var dashboard = new ClienteDashboardForm(domain, _menuForm);
+                    var dashboard = new ClienteDashboardForm(domain, _menuForm, email);
                     _menuForm.MostrarEnPanel(dashboard);
                 }
                 else

@@ -19,7 +19,6 @@ namespace FootballGo.WebAPI
 
                 var dtos = lista.Select(c => new CanchaDTO
                 {
-                    Id = c.IdCancha,
                     NroCancha = c.NroCancha,
                     Estado = c.EstadoCancha,
                     TipoCancha = c.TipoCancha,
@@ -35,14 +34,13 @@ namespace FootballGo.WebAPI
             // ✅ GET /canchas/{id}
             group.MapGet("/{id:int}", (int id, CanchaService service) =>
             {
-                var cancha = service.Listar().FirstOrDefault(c => c.IdCancha == id);
+                var cancha = service.Listar().FirstOrDefault(c => c.NroCancha == id);
 
                 if (cancha == null)
                     return Results.NotFound($"No existe la cancha con Id {id}.");
 
                 var dto = new CanchaDTO
                 {
-                    Id = cancha.IdCancha,
                     NroCancha = cancha.NroCancha,
                     Estado = cancha.EstadoCancha,
                     TipoCancha = cancha.TipoCancha,
@@ -91,7 +89,6 @@ namespace FootballGo.WebAPI
                 try
                 {
                     service.Actualizar(
-                        dto.Id,
                         dto.NroCancha,
                         dto.Estado,
                         dto.TipoCancha,

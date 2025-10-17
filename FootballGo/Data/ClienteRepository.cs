@@ -108,14 +108,14 @@ namespace Data
             while (reader.Read())
             {
                 var cliente = new Cliente(
-                    reader.GetInt32(0),    // Id
-                    reader.GetString(1),   // Nombre
-                    reader.GetString(2),   // Apellido
-                    reader.GetString(3),   // Email
-                    reader.GetInt32(4),    // dni
-                    reader.GetInt32(5),    // telefono
-                    reader.GetDateTime(6),  // FechaAlta
-                    reader.GetString(10)   // Contrasenia
+                    reader.GetInt32(0),    
+                    reader.GetString(1),   
+                    reader.GetString(2),   
+                    reader.GetString(3),   
+                    reader.GetInt32(4),    
+                    reader.GetInt32(5),    
+                    reader.GetDateTime(6),  
+                    reader.GetString(10)   
                 );
 
                 clientes.Add(cliente);

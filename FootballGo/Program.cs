@@ -268,7 +268,6 @@ canchas.MapPost("", async (DTOs.Cancha dto, FootballGoDbContext db) =>
 
     var e = new Domain.Model.Cancha
     {
-        IdCancha = dto.Id,
         NroCancha = dto.NroCancha,
         EstadoCancha = dto.Estado,
         TipoCancha = dto.TipoCancha,
@@ -278,23 +277,22 @@ canchas.MapPost("", async (DTOs.Cancha dto, FootballGoDbContext db) =>
     db.Canchas.Add(e);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/api/canchas/{e.IdCancha}", ToDtoCancha(e));
+    return Results.Created($"/api/canchas/{e.NroCancha}", ToDtoCancha(e));
 });
 
 // PUT /api/canchas
 canchas.MapPut("", async (DTOs.Cancha dto, FootballGoDbContext db) =>
 {
-    if (dto.Id <= 0) return Results.BadRequest("Id inválido.");
+    if (dto.NroCancha <= 0) return Results.BadRequest("Id inválido.");
 
-    var e = await db.Canchas.FindAsync(dto.Id);
-    if (e is null) return Results.NotFound($"No existe cancha Id {dto.Id}");
+    var e = await db.Canchas.FindAsync(dto.NroCancha);
+    if (e is null) return Results.NotFound($"No existe cancha Id {dto.NroCancha}");
 
     var otraConEseNro = await db.Canchas
         .AsNoTracking()
-        .FirstOrDefaultAsync(c => c.NroCancha == dto.NroCancha && c.IdCancha != dto.Id);
+        .FirstOrDefaultAsync(c => c.NroCancha == dto.NroCancha && c.NroCancha != dto.NroCancha);
     if (otraConEseNro != null) return Results.Conflict("Ya existe otra cancha con ese número.");
 
-    e.IdCancha = dto.Id;
     e.NroCancha = dto.NroCancha;
     e.EstadoCancha = dto.Estado;
     e.TipoCancha = dto.TipoCancha;
@@ -316,7 +314,6 @@ canchas.MapDelete("/{id:int}", async (int id, FootballGoDbContext db) =>
 
 static DTOs.Cancha ToDtoCancha(Domain.Model.Cancha c) => new()
 {
-    Id = c.IdCancha,
     NroCancha = c.NroCancha,
     Estado = c.EstadoCancha,
     TipoCancha = c.TipoCancha,

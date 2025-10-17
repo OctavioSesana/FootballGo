@@ -13,13 +13,15 @@ namespace FootballGo.UI
         private Domain.Model.Cliente _cliente;
         private readonly MenuForm _menuForm;
         private Form? _child;
+        private readonly string _mailUsuario;  
 
-        public ClienteDashboardForm(Domain.Model.Cliente cliente, MenuForm menuForm)
+        public ClienteDashboardForm(Domain.Model.Cliente cliente, MenuForm menuForm, string mailUsuario)
         {
             InitializeComponent();
             _cliente = cliente;
             _menuForm = menuForm;
             CrearMenu();
+            _mailUsuario = mailUsuario;
         }
 
         private void ClienteDashboardForm_Load(object sender, EventArgs e)
@@ -103,14 +105,17 @@ namespace FootballGo.UI
         {
             try
             {
-                var canchas = await API.Clients.CanchaApiClient.GetAllAsync();
-                CargarEnPanel(new ListadoCanchasForm());
+                var canchas = await CanchaApiClient.GetAllAsync();
+                CargarEnPanel(new ListadoCanchasForm(_mailUsuario));
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar canchas: {ex.Message}");
+                MessageBox.Show($"Error al cargar canchas: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private async void btnDelete_Click(object? sender, EventArgs e)
         {

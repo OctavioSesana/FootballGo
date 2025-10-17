@@ -50,7 +50,6 @@ namespace API.Clients
             return created ?? throw new Exception("La API no devolvió la cancha creada.");
         }
 
-        // 🔹 corregido: tu API espera PUT en /api/canchas (sin {id})
         public static async Task UpdateAsync(CanchaDTO cancha)
         {
             var response = await client.PutAsJsonAsync("canchas", cancha);

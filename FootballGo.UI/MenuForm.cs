@@ -81,7 +81,7 @@ namespace FootballGo.UI
             {
                 if (loginForm.ClienteLogueado != null)
                 {
-                    var dashboard = new ClienteDashboardForm(loginForm.ClienteLogueado, this);
+                    var dashboard = new ClienteDashboardForm(loginForm.ClienteLogueado, this, loginForm.ClienteLogueado.Email);
                     MostrarEnPanel(dashboard);
 
                     // Mostrar bienvenida

@@ -4,7 +4,6 @@
 
     public class Cancha
     {
-        public int IdCancha { get; set; }
         public int NroCancha { get; set; }
         public EstadoCancha EstadoCancha { get; set; }
         public int TipoCancha { get; set; }       // 5 o 7

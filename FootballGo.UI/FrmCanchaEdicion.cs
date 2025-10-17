@@ -105,7 +105,7 @@ namespace FootballGo.UI
                 else
                 {
                     // Edición
-                    _service.Actualizar(_cancha.IdCancha, nro, estado, tipo, precio);
+                    _service.Actualizar(nro, estado, tipo, precio);
                 }
 
                 // Volver al listado dentro del dashboard
