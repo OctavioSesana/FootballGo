@@ -21,6 +21,7 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.lblSesion = new System.Windows.Forms.Label();
+            //this.IsMdiContainer = true;
             this.SuspendLayout();
             // 
             // menuStrip

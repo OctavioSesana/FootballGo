@@ -1,7 +1,9 @@
-﻿using FootballGo.UI;
-using Newtonsoft.Json;
-using Domain.Model;
+﻿using Domain.Model;
 using Domain.Services;
+using FootballGo.UI;
+using Newtonsoft.Json;
+using System;
+using System.Drawing;
 
 namespace MisCanchasApp
 {
@@ -78,12 +80,17 @@ namespace MisCanchasApp
             {
                 if (dgvCanchas.Columns[e.ColumnIndex].Name == "Reservar" && e.RowIndex >= 0)
                 {
+                    var cancha = dgvCanchas.Rows[e.RowIndex].DataBoundItem as Cancha;
                     var cell = dgvCanchas.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCell;
-                    if (cell != null)
+
+                    if (cancha != null && cell != null)
                     {
-                        cell.Style.BackColor = Color.LightGreen;
-                        cell.Style.ForeColor = Color.DarkGreen;
-                        cell.Style.Font = new Font(dgvCanchas.Font, FontStyle.Bold);
+                       
+                            cell.Style.BackColor = Color.LightGreen;
+                            cell.Style.ForeColor = Color.DarkGreen;
+                            cell.Style.Font = new Font(dgvCanchas.Font, FontStyle.Bold);
+                            cell.Value = "Reservar";
+                        
                     }
                 }
             };
@@ -102,6 +109,15 @@ namespace MisCanchasApp
             if (e.RowIndex >= 0 && dgvCanchas.Columns[e.ColumnIndex].Name == "Reservar")
             {
                 var canchaSeleccionada = (Cancha)dgvCanchas.Rows[e.RowIndex].DataBoundItem;
+                if (canchaSeleccionada.EstadoCancha == EstadoCancha.Mantenimiento)
+                {
+                    MessageBox.Show(
+                    $"La Cancha N° {canchaSeleccionada.NroCancha} se encuentra en mantenimiento y no puede ser reservada.",
+                    "Cancha No Disponible",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
 
                 var reservaForm = new ReservaForm(canchaSeleccionada, _mailUsuario);
                 reservaForm.ShowDialog();
@@ -109,3 +125,4 @@ namespace MisCanchasApp
         }
     }
 }
+

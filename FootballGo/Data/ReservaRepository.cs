@@ -73,11 +73,11 @@ namespace Data
         public IEnumerable<Reserva> GetByCriteria(string texto)
         {
             const string sql = @"
-                SELECT IdReserva, IdCancha, mailUsuario, FechaReserva, HoraInicio, PrecioTotal
+                SELECT IdReserva, NroCancha, mailUsuario, FechaReserva, HoraInicio, PrecioTotal
                 FROM Reservas
                 WHERE mailUsuario LIKE @SearchTerm
                    OR CONVERT(VARCHAR, FechaReserva, 103) LIKE @SearchTerm
-                   OR CAST(IdCancha AS VARCHAR) LIKE @SearchTerm
+                   OR CAST(NroCancha AS VARCHAR) LIKE @SearchTerm
                 ORDER BY FechaReserva DESC";
 
             var reservas = new List<Reserva>();
@@ -95,7 +95,7 @@ namespace Data
             {
                 var reserva = new Reserva(
                     reader.GetInt32(0),           // IdReserva
-                    reader.GetInt32(1),           // IdCancha
+                    reader.GetInt32(1),           // NroCancha
                     reader.GetString(2),          // mailUsuario
                     reader.GetDateTime(3),        // FechaReserva
                     reader.GetTimeSpan(4),        // HoraInicio

@@ -33,7 +33,7 @@ namespace FootballGo.UI
         private void ReservaForm_Load(object sender, EventArgs e)
         {
 
-            lblCancha.Text = $"Cancha N° {_cancha.NroCancha} - Tipo {_cancha.TipoCancha}";
+            lblCancha.Text = $"Cancha N° {_cancha.NroCancha} - Futbol {_cancha.TipoCancha}";
             lblPrecio.Text = $"Precio: {_cancha.PrecioPorHora:C2}";
 
             dtpFecha.MinDate = DateTime.Today;

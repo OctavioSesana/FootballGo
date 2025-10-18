@@ -1,6 +1,8 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Domain.Model;
+using ReservaDTO = DTOs.Reserva;
+
 
 namespace API.Clients
 {
@@ -17,14 +19,14 @@ namespace API.Clients
             client.Timeout = TimeSpan.FromSeconds(30);
         }
 
-        public static async Task<Reserva> GetAsync(int id)
+        public static async Task<ReservaDTO> GetAsync(int id)
         {
             try
             {
                 var response = await client.GetAsync($"reservas/{id}");
                 if (response.IsSuccessStatusCode)
                 {
-                    var reserva = await response.Content.ReadFromJsonAsync<Reserva>();
+                    var reserva = await response.Content.ReadFromJsonAsync<ReservaDTO>();
                     if (reserva == null)
                         throw new Exception("Respuesta vacía al obtener reserva.");
                     return reserva;
@@ -43,15 +45,15 @@ namespace API.Clients
             }
         }
 
-        public static async Task<IEnumerable<Reserva>> GetAllAsync()
+        public static async Task<IEnumerable<ReservaDTO>> GetAllAsync()
         {
             try
             {
                 var response = await client.GetAsync("reservas");
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<Reserva>>()
-                           ?? Enumerable.Empty<Reserva>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ReservaDTO>>()
+                           ?? Enumerable.Empty<ReservaDTO>();
                 }
 
                 var errorContent = await response.Content.ReadAsStringAsync();
@@ -67,7 +69,7 @@ namespace API.Clients
             }
         }
 
-        public static async Task<Reserva> AddAsync(Reserva reserva)
+        public static async Task<ReservaDTO> AddAsync(Reserva reserva)
         {
             var response = await client.PostAsJsonAsync("reservas", reserva);
             if (!response.IsSuccessStatusCode)
@@ -76,7 +78,7 @@ namespace API.Clients
                 throw new Exception($"Error al crear reserva. Status: {response.StatusCode}. {error}");
             }
 
-            var created = await response.Content.ReadFromJsonAsync<Reserva>();
+            var created = await response.Content.ReadFromJsonAsync<ReservaDTO>();
             if (created == null)
                 throw new Exception("La API no devolvió la reserva creada.");
             return created;
@@ -124,15 +126,15 @@ namespace API.Clients
             }
         }
 
-        public static async Task<IEnumerable<Reserva>> GetByCriteriaAsync(string texto)
+        public static async Task<IEnumerable<ReservaDTO>> GetByCriteriaAsync(string texto)
         {
             try
             {
                 var response = await client.GetAsync($"reservas/criteria?texto={Uri.EscapeDataString(texto)}");
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<Reserva>>()
-                           ?? Enumerable.Empty<Reserva>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<ReservaDTO>>()
+                           ?? Enumerable.Empty<ReservaDTO>();
                 }
 
                 var errorContent = await response.Content.ReadAsStringAsync();

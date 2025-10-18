@@ -320,5 +320,48 @@ static DTOs.Cancha ToDtoCancha(Domain.Model.Cancha c) => new()
     PrecioPorHora = c.PrecioPorHora
 };
 
+// ===================== RESERVAS =====================
+var reservas = app.MapGroup("/reservas");
+
+reservas.MapGet("/criteria", async (string texto, FootballGoDbContext db) =>
+{
+    texto = (texto ?? string.Empty).ToLower();
+
+    var list = await db.Reservas
+        .Where(r => r.mailUsuario.ToLower().Contains(texto))
+        .AsNoTracking()
+        .ToListAsync();
+
+    return Results.Ok(list.Select(ToDtoReserva));
+});
+
+
+
+reservas.MapDelete("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Reservas.FindAsync(id);
+    if (e is null) return Results.NotFound();
+
+
+    db.Reservas.Remove(e);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+reservas.MapGet("/{id:int}", async (int id, FootballGoDbContext db) =>
+{
+    var e = await db.Reservas.AsNoTracking().FirstOrDefaultAsync(r => r.IdReserva == id);
+    return e is null ? Results.NotFound() : Results.Ok(ToDtoReserva(e));
+});
+
+static DTOs.Reserva ToDtoReserva(Domain.Model.Reserva r) => new()
+{
+    IdReserva = r.IdReserva,
+    NroCancha = r.NroCancha,
+    mailUsuario = r.mailUsuario,
+    FechaReserva = r.FechaReserva,
+    HoraInicio = r.HoraInicio,
+    PrecioTotal = r.PrecioTotal
+};
 
 app.Run();

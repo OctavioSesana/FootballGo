@@ -76,8 +76,16 @@ namespace FootballGo.UI
 
         private void btnReservas(object? sender, EventArgs e)
         {
-           MessageBox.Show("Funcionalidad de ver reservas no implementada aún.", "Info",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (string.IsNullOrWhiteSpace(_mailUsuario))
+            {
+                MessageBox.Show("No se ha detectado una sesión de usuario válida.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            CargarEnPanel(new ListadoReservasUsuarioForm(_mailUsuario)
+);
+
+            
         }
 
         private void btnGestionarPerfil_Click(object? sender, EventArgs e)

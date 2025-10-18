@@ -10,7 +10,7 @@ public class Reserva
     public TimeSpan HoraInicio { get; set; }
     public decimal PrecioTotal { get; set; }
 
-    protected Reserva() { }
+    public Reserva() { }
 
     public Reserva(int Id, int NroCancha, string mailUsuario, DateTime FechaReserva, TimeSpan HoraInicio, decimal PrecioTotal)
     {

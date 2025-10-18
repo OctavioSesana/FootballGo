@@ -12,6 +12,7 @@ builder.Services.AddDbContext<FootballGoDbContext>(options =>
 builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<EmpleadoService>();
 builder.Services.AddScoped<CanchaService>();
+builder.Services.AddScoped<ReservaService>();
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -36,5 +37,6 @@ if (app.Environment.IsDevelopment())
 app.MapClienteEndpoints();
 app.MapEmpleadoEndpoints();
 app.MapCanchaEndpoints();
+app.MapReservaEndpoints();
 
 app.Run();
